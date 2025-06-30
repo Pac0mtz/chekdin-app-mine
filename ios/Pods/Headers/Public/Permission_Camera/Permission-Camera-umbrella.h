@@ -1,1 +1,0 @@
-../../../Target Support Files/Permission-Camera/Permission-Camera-umbrella.h

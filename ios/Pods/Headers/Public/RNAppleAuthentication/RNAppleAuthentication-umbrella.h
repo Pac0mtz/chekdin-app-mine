@@ -1,1 +1,0 @@
-../../../Target Support Files/RNAppleAuthentication/RNAppleAuthentication-umbrella.h
