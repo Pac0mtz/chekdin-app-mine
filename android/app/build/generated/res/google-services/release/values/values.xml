@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">864646753923-flmvc0hkt4fuim6m9sa2strrcofafhd7.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">864646753923</string>
+    <string name="google_api_key" translatable="false">AIzaSyBgJ0di5CB9EcL21BANmxpA5e4c8rT-9gw</string>
+    <string name="google_app_id" translatable="false">1:864646753923:android:dc032f41013d955b4c75b6</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBgJ0di5CB9EcL21BANmxpA5e4c8rT-9gw</string>
+    <string name="google_storage_bucket" translatable="false">chekdin-e7f0b.appspot.com</string>
+    <string name="project_id" translatable="false">chekdin-e7f0b</string>
+</resources>

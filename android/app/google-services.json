@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "864646753923",
+    "project_id": "chekdin-e7f0b",
+    "storage_bucket": "chekdin-e7f0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864646753923:android:dc032f41013d955b4c75b6",
+        "android_client_info": {
+          "package_name": "com.checkdinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864646753923-407r8gdc5o1907nmv4idck174r8ottsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.checkdinapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "864646753923-54e2rm2vej3k3k6atmjf85uuv594e03d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.checkdinapp",
+            "certificate_hash": "2d6500853b52d12994eab0a7e9c8080532621860"
+          }
+        },
+        {
+          "client_id": "864646753923-l8k4o2be8438itti9248rgsf2cufphos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.checkdinapp",
+            "certificate_hash": "de828df34b326c1b0365ba577206ad61f12244ed"
+          }
+        },
+        {
+          "client_id": "864646753923-flmvc0hkt4fuim6m9sa2strrcofafhd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgJ0di5CB9EcL21BANmxpA5e4c8rT-9gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864646753923-c9ff6bu47v7iqhpf72828md5kd8pc8vk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "864646753923-3c8h6143ui8sfu65qkfjbb9jms3adrim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.checkdinapp",
+                "app_store_id": "6459511798"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

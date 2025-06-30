@@ -1,0 +1,1008 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.checkdinapp"
+4    android:versionCode="12"
+5    android:versionName="2.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:5:3-65
+12-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:5:20-62
+13    <uses-permission android:name="android.permission.VIBRATE" />
+13-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:6:3-63
+13-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:6:20-61
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:7:3-77
+14-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:7:20-74
+15    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+15-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:8:3-78
+15-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:8:20-75
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->[com.facebook.flipper:flipper:0.182.0] /Users/franciscomartinez/.gradle/caches/transforms-3/9688f9658a9fd3bb7646d157ca6bc56a/transformed/jetified-flipper-0.182.0/AndroidManifest.xml:16:5-76
+16-->[com.facebook.flipper:flipper:0.182.0] /Users/franciscomartinez/.gradle/caches/transforms-3/9688f9658a9fd3bb7646d157ca6bc56a/transformed/jetified-flipper-0.182.0/AndroidManifest.xml:16:22-73
+17    <uses-permission android:name="android.permission.WAKE_LOCK" />
+17-->[:react-native-firebase_auth] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/auth/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:5-68
+17-->[:react-native-firebase_auth] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/auth/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:22-65
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to read and write the expansion files on shared storage -->
+18-->[:react-native-firebase_auth] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/auth/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
+18-->[:react-native-firebase_auth] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/auth/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required to read and write the expansion files on shared storage for Android 11 -->
+19-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:5-81
+19-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:22-78
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Required to to download files without a notification -->
+20-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:5-80
+20-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:22-77
+21    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+21-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:32:5-88
+21-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:32:22-85
+22    <uses-permission android:name="android.permission.CAMERA" />
+22-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:7:5-65
+22-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:7:22-62
+23
+24    <uses-feature
+24-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:9:5-11:36
+25        android:name="android.hardware.camera"
+25-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:10:9-47
+26        android:required="false" />
+26-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:11:9-33
+27    <uses-feature
+27-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:12:5-14:36
+28        android:name="android.hardware.camera.autofocus"
+28-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:13:9-57
+29        android:required="false" />
+29-->[:react-native-camera] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-camera/android/build/intermediates/merged_manifest/generalDebug/AndroidManifest.xml:14:9-33
+30
+31    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+31-->[:react-native-get-location] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-get-location/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-81
+31-->[:react-native-get-location] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-get-location/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:22-78
+32
+33    <queries>
+33-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:17:5-19:15
+34        <package android:name="com.facebook.katana" />
+34-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:18:9-55
+34-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:18:18-52
+35        <!-- Needs to be explicitly declared on Android R+ -->
+36        <package android:name="com.google.android.apps.maps" />
+36-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:33:9-64
+36-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:33:18-61
+37    </queries>
+38
+39    <uses-feature
+39-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:26:5-28:35
+40        android:glEsVersion="0x00020000"
+40-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:27:9-41
+41        android:required="true" />
+41-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:28:9-32
+42
+43    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+43-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:25:5-77
+43-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:25:22-74
+44    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+44-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:28:5-82
+44-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:28:22-79
+45    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+45-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:27:5-81
+45-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:27:22-78
+46    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+46-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:28:5-77
+46-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:28:22-74
+47    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+47-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:16:5-79
+47-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:16:22-76
+48
+49    <permission
+49-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
+50        android:name="com.checkdinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+50-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
+51        android:protectionLevel="signature" />
+51-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
+52
+53    <uses-permission android:name="com.checkdinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+53-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
+53-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
+54    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+54-->[com.android.installreferrer:installreferrer:1.0] /Users/franciscomartinez/.gradle/caches/transforms-3/1f02942d841ceebebe2df31237f92283/transformed/jetified-installreferrer-1.0/AndroidManifest.xml:9:5-110
+54-->[com.android.installreferrer:installreferrer:1.0] /Users/franciscomartinez/.gradle/caches/transforms-3/1f02942d841ceebebe2df31237f92283/transformed/jetified-installreferrer-1.0/AndroidManifest.xml:9:22-107
+55
+56    <application
+56-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:11:5-61:19
+57        android:name="com.checkdinapp.MainApplication"
+57-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:12:7-38
+58        android:allowBackup="false"
+58-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:16:7-34
+59        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+59-->[androidx.core:core:1.13.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ae15b2ebfa25747ca5f32a765f5fe64/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
+60        android:debuggable="true"
+61        android:extractNativeLibs="false"
+62        android:icon="@mipmap/ic_launcher"
+62-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:14:7-41
+63        android:label="@string/app_name"
+63-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:13:7-39
+64        android:roundIcon="@mipmap/ic_launcher_round"
+64-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:15:7-52
+65        android:supportsRtl="true"
+65-->[com.facebook.android:facebook-android-sdk:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/02ffb55275f36787e3bc462c4b7487ab/transformed/jetified-facebook-android-sdk-17.0.0/AndroidManifest.xml:16:18-44
+66        android:theme="@style/AppTheme"
+66-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:17:7-38
+67        android:usesCleartextTraffic="true" >
+67-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:8:9-44
+68        <activity
+68-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:11:9-111
+69            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+69-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:11:19-83
+70            android:exported="false" />
+70-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/debug/AndroidManifest.xml:11:84-108
+71
+72        <meta-data
+72-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:18:7-21:8
+73            android:name="com.google.android.geo.API_KEY"
+73-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:19:6-51
+74            android:value="AIzaSyBUYUSLiHDE7SZurjNe2um_i4hy7hVajjw" />
+74-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:20:6-61
+75        <meta-data
+75-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:22:5-103
+76            android:name="com.facebook.sdk.ApplicationId"
+76-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:22:16-61
+77            android:value="@string/facebook_app_id" />
+77-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:22:62-101
+78        <meta-data
+78-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:23:5-107
+79            android:name="com.facebook.sdk.ClientToken"
+79-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:23:16-59
+80            android:value="@string/facebook_client_token" />
+80-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:23:60-105
+81
+82        <provider
+82-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:24:6-27:39
+83            android:name="com.facebook.FacebookContentProvider"
+83-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:26:13-64
+84            android:authorities="com.facebook.app.FacebookContentProvider3099591726839945"
+84-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:25:13-91
+85            android:exported="true" />
+85-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:27:13-36
+86
+87        <activity
+87-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:29:5-179
+88            android:name="com.facebook.FacebookActivity"
+88-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:29:15-59
+89            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+89-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:29:60-143
+90            android:label="@string/app_name"
+90-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:29:144-176
+91            android:theme="@style/com_facebook_activity_theme" />
+91-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:25:13-63
+92        <activity
+92-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:30:13-46:24
+93            android:name="com.facebook.CustomTabActivity"
+93-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:31:17-62
+94            android:exported="true" >
+94-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:32:17-40
+95            <intent-filter>
+95-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:33:17-45:33
+96                <action android:name="android.intent.action.SEND" />
+96-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:34:21-73
+96-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:34:29-70
+97                <action android:name="android.intent.action.VIEW" />
+97-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:21-73
+97-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:29-70
+98
+99                <category android:name="android.intent.category.DEFAULT" />
+99-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:21-80
+99-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:31-77
+100                <category android:name="android.intent.category.BROWSABLE" />
+100-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:21-82
+100-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:31-79
+101
+102                <data android:scheme="@string/fb_login_protocol_scheme" />
+102-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:21-79
+102-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:27-76
+103                <data android:mimeType="image/*" />
+103-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:21-79
+104                <!--
+105                    <data
+106                    android:host="checkdinapp.page.link"
+107                    android:scheme="https"
+108                    android:pathPattern="/test" 
+109                    />
+110                -->
+111            </intent-filter>
+112            <intent-filter>
+112-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:31:13-40:29
+113                <action android:name="android.intent.action.VIEW" />
+113-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:21-73
+113-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:29-70
+114
+115                <category android:name="android.intent.category.DEFAULT" />
+115-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:21-80
+115-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:31-77
+116                <category android:name="android.intent.category.BROWSABLE" />
+116-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:21-82
+116-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:31-79
+117
+118                <data
+118-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:21-79
+119                    android:host="cct.com.checkdinapp"
+120                    android:scheme="fbconnect" />
+120-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:27-76
+121            </intent-filter>
+122        </activity>
+123        <activity
+123-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:48:7-60:18
+124            android:name="com.checkdinapp.MainActivity"
+124-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:49:9-37
+125            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+125-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:52:9-118
+126            android:exported="true"
+126-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:55:9-32
+127            android:label="@string/app_name"
+127-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:50:9-41
+128            android:launchMode="singleTask"
+128-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:53:9-40
+129            android:screenOrientation="portrait"
+129-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:51:9-45
+130            android:windowSoftInputMode="adjustResize" >
+130-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:54:9-51
+131            <intent-filter>
+131-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:56:9-59:25
+132                <action android:name="android.intent.action.MAIN" />
+132-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:57:13-65
+132-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:57:21-62
+133
+134                <category android:name="android.intent.category.LAUNCHER" />
+134-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:58:13-73
+134-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:58:23-70
+135            </intent-filter>
+136        </activity>
+137
+138        <service
+138-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-14:40
+139            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService"
+139-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-103
+140            android:exported="false" />
+140-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-37
+141        <service
+141-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-21:19
+142            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
+142-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-95
+143            android:exported="false" >
+143-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-37
+144            <intent-filter>
+144-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-20:29
+145                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+145-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:17-78
+145-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:25-75
+146            </intent-filter>
+147        </service>
+148
+149        <receiver
+149-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-30:20
+150            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
+150-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-96
+151            android:exported="true"
+151-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-36
+152            android:permission="com.google.android.c2dm.permission.SEND" >
+152-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-73
+153            <intent-filter>
+153-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-29:29
+154                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+154-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:17-81
+154-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:25-78
+155            </intent-filter>
+156        </receiver>
+157
+158        <meta-data
+158-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:32:9-34:36
+159            android:name="firebase_messaging_auto_init_enabled"
+159-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-64
+160            android:value="true" />
+160-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:34:13-33
+161        <meta-data
+161-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:35:9-37:32
+162            android:name="com.google.firebase.messaging.default_notification_channel_id"
+162-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-89
+163            android:value="" />
+163-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-29
+164        <meta-data
+164-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:38:9-40:47
+165            android:name="com.google.firebase.messaging.default_notification_color"
+165-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-84
+166            android:resource="@color/white" />
+166-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-44
+167        <meta-data
+167-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:9-11:36
+168            android:name="app_data_collection_default_enabled"
+168-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-63
+169            android:value="true" />
+169-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-33
+170
+171        <service
+171-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-21:19
+172            android:name="com.google.firebase.components.ComponentDiscoveryService"
+172-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-84
+173            android:directBootAware="true"
+173-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-43
+174            android:exported="false" >
+174-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+175            <meta-data
+175-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-20:85
+176                android:name="com.google.firebase.components:io.invertase.firebase.app.ReactNativeFirebaseAppRegistrar"
+176-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:17-120
+177                android:value="com.google.firebase.components.ComponentRegistrar" />
+177-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:17-82
+178            <meta-data
+178-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:55:13-57:85
+179                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+179-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:56:17-119
+180                android:value="com.google.firebase.components.ComponentRegistrar" />
+180-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:57:17-82
+181            <meta-data
+181-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/franciscomartinez/.gradle/caches/transforms-3/bfdb289a4d10ebf35edc343bf46a245e/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:26:13-28:85
+182                android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar"
+182-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/franciscomartinez/.gradle/caches/transforms-3/bfdb289a4d10ebf35edc343bf46a245e/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:27:17-133
+183                android:value="com.google.firebase.components.ComponentRegistrar" />
+183-->[com.google.firebase:firebase-dynamic-links:21.1.0] /Users/franciscomartinez/.gradle/caches/transforms-3/bfdb289a4d10ebf35edc343bf46a245e/transformed/jetified-firebase-dynamic-links-21.1.0/AndroidManifest.xml:28:17-82
+184            <meta-data
+184-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:69:13-71:85
+185                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+185-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:70:17-109
+186                android:value="com.google.firebase.components.ComponentRegistrar" />
+186-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:71:17-82
+187            <meta-data
+187-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/franciscomartinez/.gradle/caches/transforms-3/6ff116b420ba21e016536ef1951718a0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+188                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+188-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/franciscomartinez/.gradle/caches/transforms-3/6ff116b420ba21e016536ef1951718a0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+189                android:value="com.google.firebase.components.ComponentRegistrar" />
+189-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/franciscomartinez/.gradle/caches/transforms-3/6ff116b420ba21e016536ef1951718a0/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+190            <meta-data
+190-->[com.google.firebase:firebase-installations:17.1.3] /Users/franciscomartinez/.gradle/caches/transforms-3/273f4cca83e5092d751d79515504eaa0/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:17:13-19:85
+191                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+191-->[com.google.firebase:firebase-installations:17.1.3] /Users/franciscomartinez/.gradle/caches/transforms-3/273f4cca83e5092d751d79515504eaa0/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:18:17-127
+192                android:value="com.google.firebase.components.ComponentRegistrar" />
+192-->[com.google.firebase:firebase-installations:17.1.3] /Users/franciscomartinez/.gradle/caches/transforms-3/273f4cca83e5092d751d79515504eaa0/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:19:17-82
+193        </service>
+194
+195        <provider
+195-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-27:38
+196            android:name="io.invertase.firebase.app.ReactNativeFirebaseAppInitProvider"
+196-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-88
+197            android:authorities="com.checkdinapp.reactnativefirebaseappinitprovider"
+197-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-86
+198            android:exported="false"
+198-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-37
+199            android:initOrder="99" />
+199-->[:react-native-firebase_app] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-35
+200        <provider
+200-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:35:9-43:20
+201            android:name="com.ReactNativeBlobUtil.Utils.FileProvider"
+201-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-70
+202            android:authorities="com.checkdinapp.provider"
+202-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-60
+203            android:exported="false"
+203-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-37
+204            android:grantUriPermissions="true" >
+204-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-47
+205            <meta-data
+205-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-42:58
+206                android:name="android.support.FILE_PROVIDER_PATHS"
+206-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:17-67
+207                android:resource="@xml/provider_paths" />
+207-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:17-55
+208        </provider>
+209        <provider
+209-->[:react-native-image-picker] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+210            android:name="com.imagepicker.ImagePickerProvider"
+210-->[:react-native-image-picker] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-63
+211            android:authorities="com.checkdinapp.imagepickerprovider"
+211-->[:react-native-image-picker] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-71
+212            android:exported="false"
+212-->[:react-native-image-picker] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
+213            android:grantUriPermissions="true" >
+213-->[:react-native-image-picker] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+214            <meta-data
+214-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-42:58
+215                android:name="android.support.FILE_PROVIDER_PATHS"
+215-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:17-67
+216                android:resource="@xml/imagepicker_provider_paths" />
+216-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:17-55
+217        </provider>
+218        <provider
+218-->[:react-native-share] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+219            android:name="cl.json.RNShareFileProvider"
+219-->[:react-native-share] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-55
+220            android:authorities="com.checkdinapp.rnshare.fileprovider"
+220-->[:react-native-share] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-72
+221            android:exported="false"
+221-->[:react-native-share] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
+222            android:grantUriPermissions="true" >
+222-->[:react-native-share] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+223            <meta-data
+223-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-42:58
+224                android:name="android.support.FILE_PROVIDER_PATHS"
+224-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:17-67
+225                android:resource="@xml/share_download_paths" />
+225-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:17-55
+226        </provider>
+227        <provider
+227-->[:react-native-webview] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-webview/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+228            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+228-->[:react-native-webview] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-webview/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-83
+229            android:authorities="com.checkdinapp.fileprovider"
+229-->[:react-native-webview] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-webview/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-64
+230            android:exported="false"
+230-->[:react-native-webview] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-webview/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
+231            android:grantUriPermissions="true" >
+231-->[:react-native-webview] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-webview/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+232            <meta-data
+232-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-42:58
+233                android:name="android.support.FILE_PROVIDER_PATHS"
+233-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:17-67
+234                android:resource="@xml/file_provider_paths" />
+234-->[:react-native-blob-util] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/react-native-blob-util/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:17-55
+235        </provider>
+236
+237        <activity android:name="com.facebook.CustomTabMainActivity" /> <!-- Needs to be explicitly declared on P+ -->
+237-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:26:9-71
+237-->[com.facebook.android:facebook-common:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/4ffaf3984bd0a14f027cb8f67e7031ab/transformed/jetified-facebook-common-17.0.0/AndroidManifest.xml:26:19-68
+238        <uses-library
+238-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:39:9-41:40
+239            android:name="org.apache.http.legacy"
+239-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:40:13-50
+240            android:required="false" />
+240-->[com.google.android.gms:play-services-maps:18.0.2] /Users/franciscomartinez/.gradle/caches/transforms-3/90540d8aa678c5acffe45abf5451297c/transformed/jetified-play-services-maps-18.0.2/AndroidManifest.xml:41:13-37
+241
+242        <activity
+242-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:23:9-27:75
+243            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+243-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:24:13-93
+244            android:excludeFromRecents="true"
+244-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:25:13-46
+245            android:exported="false"
+245-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:26:13-37
+246            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+246-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:27:13-72
+247        <!--
+248            Service handling Google Sign-In user revocation. For apps that do not integrate with
+249            Google Sign-In, this service will never be started.
+250        -->
+251        <service
+251-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:33:9-37:51
+252            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+252-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:34:13-89
+253            android:exported="true"
+253-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:35:13-36
+254            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+254-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:36:13-107
+255            android:visibleToInstantApps="true" />
+255-->[com.google.android.gms:play-services-auth:20.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/aff33cc9fe84d2acda37aeab63e0ba9a/transformed/jetified-play-services-auth-20.5.0/AndroidManifest.xml:37:13-48
+256        <service
+256-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:9:9-15:19
+257            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+257-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:10:13-91
+258            android:directBootAware="true"
+258-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:17:13-43
+259            android:exported="false" >
+259-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:11:13-37
+260            <meta-data
+260-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:12:13-14:85
+261                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+261-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:13:17-120
+262                android:value="com.google.firebase.components.ComponentRegistrar" />
+262-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/c8b7d9b23da08a9788c1c1133e5263e7/transformed/jetified-play-services-mlkit-barcode-scanning-16.2.0/AndroidManifest.xml:14:17-82
+263            <meta-data
+263-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/1506f8fd7ff94acf488bc17b3bb70acb/transformed/jetified-play-services-mlkit-face-detection-16.2.0/AndroidManifest.xml:12:13-14:85
+264                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
+264-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/1506f8fd7ff94acf488bc17b3bb70acb/transformed/jetified-play-services-mlkit-face-detection-16.2.0/AndroidManifest.xml:13:17-114
+265                android:value="com.google.firebase.components.ComponentRegistrar" />
+265-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/1506f8fd7ff94acf488bc17b3bb70acb/transformed/jetified-play-services-mlkit-face-detection-16.2.0/AndroidManifest.xml:14:17-82
+266            <meta-data
+266-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/11a5c14f651cfd77c9257aa896624f8a/transformed/jetified-play-services-mlkit-text-recognition-16.3.0/AndroidManifest.xml:12:13-14:85
+267                android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar"
+267-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/11a5c14f651cfd77c9257aa896624f8a/transformed/jetified-play-services-mlkit-text-recognition-16.3.0/AndroidManifest.xml:13:17-114
+268                android:value="com.google.firebase.components.ComponentRegistrar" />
+268-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/11a5c14f651cfd77c9257aa896624f8a/transformed/jetified-play-services-mlkit-text-recognition-16.3.0/AndroidManifest.xml:14:17-82
+269            <meta-data
+269-->[com.google.mlkit:vision-common:16.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/8c3bd73884d72d9d5908055855400feb/transformed/jetified-vision-common-16.5.0/AndroidManifest.xml:12:13-14:85
+270                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+270-->[com.google.mlkit:vision-common:16.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/8c3bd73884d72d9d5908055855400feb/transformed/jetified-vision-common-16.5.0/AndroidManifest.xml:13:17-124
+271                android:value="com.google.firebase.components.ComponentRegistrar" />
+271-->[com.google.mlkit:vision-common:16.5.0] /Users/franciscomartinez/.gradle/caches/transforms-3/8c3bd73884d72d9d5908055855400feb/transformed/jetified-vision-common-16.5.0/AndroidManifest.xml:14:17-82
+272            <meta-data
+272-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:20:13-22:85
+273                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+273-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:21:17-120
+274                android:value="com.google.firebase.components.ComponentRegistrar" />
+274-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:22:17-82
+275        </service>
+276
+277        <receiver
+277-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:31:9-38:20
+278            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+278-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:32:13-78
+279            android:exported="true"
+279-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:33:13-36
+280            android:permission="com.google.android.c2dm.permission.SEND" >
+280-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:34:13-73
+281            <intent-filter>
+281-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-29:29
+282                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+282-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:17-81
+282-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:25-78
+283            </intent-filter>
+284        </receiver>
+285        <!--
+286             FirebaseMessagingService performs security checks at runtime,
+287             but set to not exported to explicitly avoid allowing another app to call it.
+288        -->
+289        <service
+289-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:44:9-51:19
+290            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+290-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:45:13-82
+291            android:directBootAware="true"
+291-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:46:13-43
+292            android:exported="false" >
+292-->[com.google.firebase:firebase-messaging:23.1.2] /Users/franciscomartinez/.gradle/caches/transforms-3/b17405521ca77108128688cdcf2f1412/transformed/jetified-firebase-messaging-23.1.2/AndroidManifest.xml:47:13-37
+293            <intent-filter android:priority="-500" >
+293-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-20:29
+294                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+294-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:17-78
+294-->[:react-native-firebase_messaging] /Users/franciscomartinez/Downloads/working-chekdin-mobile-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:25-75
+295            </intent-filter>
+296        </service>
+297
+298        <activity
+298-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:29:9-46:20
+299            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+299-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:30:13-80
+300            android:excludeFromRecents="true"
+300-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:31:13-46
+301            android:exported="true"
+301-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:32:13-36
+302            android:launchMode="singleTask"
+302-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:33:13-44
+303            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+303-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:34:13-72
+304            <intent-filter>
+304-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:35:13-45:29
+305                <action android:name="android.intent.action.VIEW" />
+305-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:21-73
+305-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:29-70
+306
+307                <category android:name="android.intent.category.DEFAULT" />
+307-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:21-80
+307-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:31-77
+308                <category android:name="android.intent.category.BROWSABLE" />
+308-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:21-82
+308-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:31-79
+309
+310                <data
+310-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:21-79
+311                    android:host="firebase.auth"
+312                    android:path="/"
+313                    android:scheme="genericidp" />
+313-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:27-76
+314            </intent-filter>
+315        </activity>
+316        <activity
+316-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:47:9-64:20
+317            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+317-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:48:13-79
+318            android:excludeFromRecents="true"
+318-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:49:13-46
+319            android:exported="true"
+319-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:50:13-36
+320            android:launchMode="singleTask"
+320-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:51:13-44
+321            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+321-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:52:13-72
+322            <intent-filter>
+322-->[com.google.firebase:firebase-auth:22.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5e26d4fa4b3758b8cb3351d08ad573c/transformed/jetified-firebase-auth-22.0.0/AndroidManifest.xml:53:13-63:29
+323                <action android:name="android.intent.action.VIEW" />
+323-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:21-73
+323-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:35:29-70
+324
+325                <category android:name="android.intent.category.DEFAULT" />
+325-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:21-80
+325-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:36:31-77
+326                <category android:name="android.intent.category.BROWSABLE" />
+326-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:21-82
+326-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:37:31-79
+327
+328                <data
+328-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:21-79
+329                    android:host="firebase.auth"
+330                    android:path="/"
+331                    android:scheme="recaptcha" />
+331-->/Users/franciscomartinez/Downloads/working-chekdin-mobile-app/android/app/src/main/AndroidManifest.xml:38:27-76
+332            </intent-filter>
+333        </activity>
+334
+335        <provider
+335-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:9:9-13:38
+336            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+336-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:10:13-78
+337            android:authorities="com.checkdinapp.mlkitinitprovider"
+337-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:11:13-69
+338            android:exported="false"
+338-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:12:13-37
+339            android:initOrder="99" />
+339-->[com.google.mlkit:common:17.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/5ee8183df257514fc1c23d654b5c53b5/transformed/jetified-common-17.2.0/AndroidManifest.xml:13:13-35
+340
+341        <activity
+341-->[com.google.android.gms:play-services-base:18.0.1] /Users/franciscomartinez/.gradle/caches/transforms-3/718a631e2e1776be871c8cd71a72d945/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+342            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+342-->[com.google.android.gms:play-services-base:18.0.1] /Users/franciscomartinez/.gradle/caches/transforms-3/718a631e2e1776be871c8cd71a72d945/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+343            android:exported="false"
+343-->[com.google.android.gms:play-services-base:18.0.1] /Users/franciscomartinez/.gradle/caches/transforms-3/718a631e2e1776be871c8cd71a72d945/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+344            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+344-->[com.google.android.gms:play-services-base:18.0.1] /Users/franciscomartinez/.gradle/caches/transforms-3/718a631e2e1776be871c8cd71a72d945/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+345
+346        <provider
+346-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:31:9-39:20
+347            android:name="androidx.startup.InitializationProvider"
+347-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:32:13-67
+348            android:authorities="com.checkdinapp.androidx-startup"
+348-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:33:13-68
+349            android:exported="false" >
+349-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:34:13-37
+350            <meta-data
+350-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:36:13-38:52
+351                android:name="androidx.work.WorkManagerInitializer"
+351-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:37:17-68
+352                android:value="androidx.startup" />
+352-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:38:17-49
+353            <meta-data
+353-->[androidx.emoji2:emoji2:1.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5a8f718f31bdc356760eef03e9a8cfb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+354                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+354-->[androidx.emoji2:emoji2:1.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5a8f718f31bdc356760eef03e9a8cfb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+355                android:value="androidx.startup" />
+355-->[androidx.emoji2:emoji2:1.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/d5a8f718f31bdc356760eef03e9a8cfb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+356            <meta-data
+356-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/franciscomartinez/.gradle/caches/transforms-3/aa088070df72a9d01772403f58555f1d/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+357                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+357-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/franciscomartinez/.gradle/caches/transforms-3/aa088070df72a9d01772403f58555f1d/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+358                android:value="androidx.startup" />
+358-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/franciscomartinez/.gradle/caches/transforms-3/aa088070df72a9d01772403f58555f1d/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+359            <meta-data
+359-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+360                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+360-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+361                android:value="androidx.startup" />
+361-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+362        </provider>
+363
+364        <service
+364-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:41:9-46:35
+365            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+365-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:42:13-88
+366            android:directBootAware="false"
+366-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:43:13-44
+367            android:enabled="@bool/enable_system_alarm_service_default"
+367-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:44:13-72
+368            android:exported="false" />
+368-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:45:13-37
+369        <service
+369-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:47:9-53:35
+370            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+370-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:48:13-84
+371            android:directBootAware="false"
+371-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:49:13-44
+372            android:enabled="@bool/enable_system_job_service_default"
+372-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:50:13-70
+373            android:exported="true"
+373-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:51:13-36
+374            android:permission="android.permission.BIND_JOB_SERVICE" />
+374-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:52:13-69
+375        <service
+375-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:54:9-59:35
+376            android:name="androidx.work.impl.foreground.SystemForegroundService"
+376-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:55:13-81
+377            android:directBootAware="false"
+377-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:56:13-44
+378            android:enabled="@bool/enable_system_foreground_service_default"
+378-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:57:13-77
+379            android:exported="false" />
+379-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:58:13-37
+380
+381        <receiver
+381-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:61:9-66:35
+382            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+382-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:62:13-88
+383            android:directBootAware="false"
+383-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:63:13-44
+384            android:enabled="true"
+384-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:64:13-35
+385            android:exported="false" />
+385-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:65:13-37
+386        <receiver
+386-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:67:9-77:20
+387            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+387-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:68:13-106
+388            android:directBootAware="false"
+388-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:69:13-44
+389            android:enabled="false"
+389-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:70:13-36
+390            android:exported="false" >
+390-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:71:13-37
+391            <intent-filter>
+391-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:73:13-76:29
+392                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+392-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:74:17-87
+392-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:74:25-84
+393                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+393-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:75:17-90
+393-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:75:25-87
+394            </intent-filter>
+395        </receiver>
+396        <receiver
+396-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:78:9-88:20
+397            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+397-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:79:13-104
+398            android:directBootAware="false"
+398-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:80:13-44
+399            android:enabled="false"
+399-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:81:13-36
+400            android:exported="false" >
+400-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:82:13-37
+401            <intent-filter>
+401-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:84:13-87:29
+402                <action android:name="android.intent.action.BATTERY_OKAY" />
+402-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:85:17-77
+402-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:85:25-74
+403                <action android:name="android.intent.action.BATTERY_LOW" />
+403-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:86:17-76
+403-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:86:25-73
+404            </intent-filter>
+405        </receiver>
+406        <receiver
+406-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:89:9-99:20
+407            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+407-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:90:13-104
+408            android:directBootAware="false"
+408-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:91:13-44
+409            android:enabled="false"
+409-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:92:13-36
+410            android:exported="false" >
+410-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:93:13-37
+411            <intent-filter>
+411-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:95:13-98:29
+412                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+412-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:96:17-83
+412-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:96:25-80
+413                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+413-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:97:17-82
+413-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:97:25-79
+414            </intent-filter>
+415        </receiver>
+416        <receiver
+416-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:100:9-109:20
+417            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+417-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:101:13-103
+418            android:directBootAware="false"
+418-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:102:13-44
+419            android:enabled="false"
+419-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:103:13-36
+420            android:exported="false" >
+420-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:104:13-37
+421            <intent-filter>
+421-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:106:13-108:29
+422                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+422-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:107:17-79
+422-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:107:25-76
+423            </intent-filter>
+424        </receiver>
+425        <receiver
+425-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:110:9-121:20
+426            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+426-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:111:13-88
+427            android:directBootAware="false"
+427-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:112:13-44
+428            android:enabled="false"
+428-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:113:13-36
+429            android:exported="false" >
+429-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:114:13-37
+430            <intent-filter>
+430-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:116:13-120:29
+431                <action android:name="android.intent.action.BOOT_COMPLETED" />
+431-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:117:17-79
+431-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:117:25-76
+432                <action android:name="android.intent.action.TIME_SET" />
+432-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:118:17-73
+432-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:118:25-70
+433                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+433-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:119:17-81
+433-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:119:25-78
+434            </intent-filter>
+435        </receiver>
+436        <receiver
+436-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:122:9-131:20
+437            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+437-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:123:13-99
+438            android:directBootAware="false"
+438-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:124:13-44
+439            android:enabled="@bool/enable_system_alarm_service_default"
+439-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:125:13-72
+440            android:exported="false" >
+440-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:126:13-37
+441            <intent-filter>
+441-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:128:13-130:29
+442                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+442-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:129:17-98
+442-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:129:25-95
+443            </intent-filter>
+444        </receiver>
+445        <receiver
+445-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:132:9-142:20
+446            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+446-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:133:13-78
+447            android:directBootAware="false"
+447-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:134:13-44
+448            android:enabled="true"
+448-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:135:13-35
+449            android:exported="true"
+449-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:136:13-36
+450            android:permission="android.permission.DUMP" >
+450-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:137:13-57
+451            <intent-filter>
+451-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:139:13-141:29
+452                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+452-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:140:17-88
+452-->[androidx.work:work-runtime:2.7.1] /Users/franciscomartinez/.gradle/caches/transforms-3/88a19ea86eff42446f5abe9e2ac35c58/transformed/work-runtime-2.7.1/AndroidManifest.xml:140:25-85
+453            </intent-filter>
+454        </receiver>
+455        <!--
+456         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+457         with the application context. This config is merged in with the host app's manifest,
+458         but there can only be one provider with the same authority activated at any given
+459         point; so if the end user has two or more different apps that use Facebook SDK, only the
+460         first one will be able to use the provider. To work around this problem, we use the
+461         following placeholder in the authority to identify each host application as if it was
+462         a completely different provider.
+463        -->
+464        <provider
+464-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:29:9-32:40
+465            android:name="com.facebook.internal.FacebookInitProvider"
+465-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:30:13-70
+466            android:authorities="com.checkdinapp.FacebookInitProvider"
+466-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:31:13-72
+467            android:exported="false" />
+467-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:32:13-37
+468
+469        <receiver
+469-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:34:9-40:20
+470            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+470-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:35:13-86
+471            android:exported="false" >
+471-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:36:13-37
+472            <intent-filter>
+472-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:37:13-39:29
+473                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+473-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:38:17-95
+473-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:38:25-92
+474            </intent-filter>
+475        </receiver>
+476        <receiver
+476-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:41:9-47:20
+477            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
+477-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:42:13-118
+478            android:exported="false" >
+478-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:43:13-37
+479            <intent-filter>
+479-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:44:13-46:29
+480                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
+480-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:45:17-103
+480-->[com.facebook.android:facebook-core:17.0.0] /Users/franciscomartinez/.gradle/caches/transforms-3/617ab5e17b306f70cdb128d2aefd69a3/transformed/jetified-facebook-core-17.0.0/AndroidManifest.xml:45:25-100
+481            </intent-filter>
+482        </receiver>
+483
+484        <provider
+484-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:25:9-30:39
+485            android:name="com.google.firebase.provider.FirebaseInitProvider"
+485-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:26:13-77
+486            android:authorities="com.checkdinapp.firebaseinitprovider"
+486-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:27:13-72
+487            android:directBootAware="true"
+487-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:28:13-43
+488            android:exported="false"
+488-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:29:13-37
+489            android:initOrder="100" />
+489-->[com.google.firebase:firebase-common:20.3.2] /Users/franciscomartinez/.gradle/caches/transforms-3/ac81214090c683e205af01189b37ad64/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:30:13-36
+490
+491        <meta-data
+491-->[com.google.android.gms:play-services-basement:18.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/263dfa737ef19b7d4455998d8edc71f3/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
+492            android:name="com.google.android.gms.version"
+492-->[com.google.android.gms:play-services-basement:18.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/263dfa737ef19b7d4455998d8edc71f3/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
+493            android:value="@integer/google_play_services_version" />
+493-->[com.google.android.gms:play-services-basement:18.2.0] /Users/franciscomartinez/.gradle/caches/transforms-3/263dfa737ef19b7d4455998d8edc71f3/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
+494
+495        <service
+495-->[androidx.room:room-runtime:2.2.5] /Users/franciscomartinez/.gradle/caches/transforms-3/1a367841c32fa92acee0d9df9b8b6f43/transformed/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
+496            android:name="androidx.room.MultiInstanceInvalidationService"
+496-->[androidx.room:room-runtime:2.2.5] /Users/franciscomartinez/.gradle/caches/transforms-3/1a367841c32fa92acee0d9df9b8b6f43/transformed/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
+497            android:directBootAware="true"
+497-->[androidx.room:room-runtime:2.2.5] /Users/franciscomartinez/.gradle/caches/transforms-3/1a367841c32fa92acee0d9df9b8b6f43/transformed/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
+498            android:exported="false" />
+498-->[androidx.room:room-runtime:2.2.5] /Users/franciscomartinez/.gradle/caches/transforms-3/1a367841c32fa92acee0d9df9b8b6f43/transformed/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
+499
+500        <receiver
+500-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+501            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+501-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+502            android:directBootAware="false"
+502-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+503            android:enabled="true"
+503-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+504            android:exported="true"
+504-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+505            android:permission="android.permission.DUMP" >
+505-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+506            <intent-filter>
+506-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+507                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+507-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+507-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+508            </intent-filter>
+509            <intent-filter>
+509-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+510                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+510-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+510-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+511            </intent-filter>
+512            <intent-filter>
+512-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+513                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+513-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+513-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+514            </intent-filter>
+515            <intent-filter>
+515-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+516                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+516-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+516-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/franciscomartinez/.gradle/caches/transforms-3/e30c09ade4d817175a4abc9a03e69bd5/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+517            </intent-filter>
+518        </receiver>
+519
+520        <service
+520-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+521            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+521-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+522            android:exported="false" >
+522-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+523            <meta-data
+523-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+524                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+524-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+525                android:value="cct" />
+525-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/d46534ddbb13aa5c5a02b402db2c0638/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+526        </service>
+527        <service
+527-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+528            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+528-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+529            android:exported="false"
+529-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+530            android:permission="android.permission.BIND_JOB_SERVICE" >
+530-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+531        </service>
+532
+533        <receiver
+533-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+534            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+534-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+535            android:exported="false" />
+535-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/franciscomartinez/.gradle/caches/transforms-3/02292cc40e121b3242b48cfda02edb94/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+536
+537        <meta-data
+537-->[com.facebook.soloader:soloader:0.10.5] /Users/franciscomartinez/.gradle/caches/transforms-3/0926f78a26855cb7d0afc6a062d4e28d/transformed/jetified-soloader-0.10.5/AndroidManifest.xml:12:9-14:37
+538            android:name="com.facebook.soloader.enabled"
+538-->[com.facebook.soloader:soloader:0.10.5] /Users/franciscomartinez/.gradle/caches/transforms-3/0926f78a26855cb7d0afc6a062d4e28d/transformed/jetified-soloader-0.10.5/AndroidManifest.xml:13:13-57
+539            android:value="false" />
+539-->[com.facebook.soloader:soloader:0.10.5] /Users/franciscomartinez/.gradle/caches/transforms-3/0926f78a26855cb7d0afc6a062d4e28d/transformed/jetified-soloader-0.10.5/AndroidManifest.xml:14:13-34
+540    </application>
+541
+542</manifest>

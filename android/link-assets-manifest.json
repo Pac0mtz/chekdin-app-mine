@@ -1,0 +1,173 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/icons/Vector.png",
+      "sha1": "dd977a044f968dc27f0019ad8949647a76cded18"
+    },
+    {
+      "path": "src/assets/icons/arrowleft.png",
+      "sha1": "2477275d053cd2e9c07e4b38bdd541821021514c"
+    },
+    {
+      "path": "src/assets/icons/back.png",
+      "sha1": "7d033ba0b6bfdcc3f2293a28826e0cfebe2cc217"
+    },
+    {
+      "path": "src/assets/icons/bluet.png",
+      "sha1": "0aaf881e3306ae718b53d7056638aabf5d6f123a"
+    },
+    {
+      "path": "src/assets/icons/camera.png",
+      "sha1": "745392d100e4e14baa7210056a035da295589bff"
+    },
+    {
+      "path": "src/assets/icons/check.png",
+      "sha1": "01f153c80c3cf75d5ae599cadab09ad13934992b"
+    },
+    {
+      "path": "src/assets/icons/close.png",
+      "sha1": "d7680405a8b586fda594c1770984817d1a6950f4"
+    },
+    {
+      "path": "src/assets/icons/coupons.png",
+      "sha1": "91ac0ca6379ae4ba14dd629ca90f854482d4f4d3"
+    },
+    {
+      "path": "src/assets/icons/edit.png",
+      "sha1": "7d99c15ac17fb8b6306542d931f608e399215c29"
+    },
+    {
+      "path": "src/assets/icons/eye-slash.png",
+      "sha1": "fffa8bd4e665433fef7d3652d78c77b52953a5c1"
+    },
+    {
+      "path": "src/assets/icons/eye.png",
+      "sha1": "bfd95af9f39b5ca6e6dcb16aa56a65c8063a2eba"
+    },
+    {
+      "path": "src/assets/icons/facebook.png",
+      "sha1": "9cdf0823db2cb493ffc515a548eb2d6950b9fda2"
+    },
+    {
+      "path": "src/assets/icons/filter.png",
+      "sha1": "1a143ad8c0b807cc55de7b367a1649273aa4b6da"
+    },
+    {
+      "path": "src/assets/icons/greenT.png",
+      "sha1": "3c34b4d31f01ee498f6a16f706a0ecfcd39eb744"
+    },
+    {
+      "path": "src/assets/icons/home.png",
+      "sha1": "eed563b1188b450747aa5c3232e6ceeeb368711c"
+    },
+    {
+      "path": "src/assets/icons/instagram.png",
+      "sha1": "b24c7f233e00762e4820224bb8d4c5445dc75967"
+    },
+    {
+      "path": "src/assets/icons/lightT.png",
+      "sha1": "0b9e5ff385363b12491dcffb9a20d5687cf80472"
+    },
+    {
+      "path": "src/assets/icons/linkedin.png",
+      "sha1": "9c6a21de552c9cba308b3e4442ce9ee49b3bf92e"
+    },
+    {
+      "path": "src/assets/icons/logout.png",
+      "sha1": "9df1f09d5660466acaae4394af6fadfc3c0c5e00"
+    },
+    {
+      "path": "src/assets/icons/map.png",
+      "sha1": "0675bd7543ef4460e03616af101809253bf2d17a"
+    },
+    {
+      "path": "src/assets/icons/menu.png",
+      "sha1": "41f8d03b18afbedb62fff56339ed06819dfb1e9d"
+    },
+    {
+      "path": "src/assets/icons/message.png",
+      "sha1": "fafa2294ee66dc05e641683a1d66f268d7ffc5b9"
+    },
+    {
+      "path": "src/assets/icons/search.png",
+      "sha1": "5b9647d49d231424967339249cccdf5bd12541bb"
+    },
+    {
+      "path": "src/assets/icons/search1.png",
+      "sha1": "19bc34a65cb9ccbeb51a528e5d51aba1cf489688"
+    },
+    {
+      "path": "src/assets/icons/setting.png",
+      "sha1": "bcd356349c5b8aa576b6b36ce6b8019be716fb94"
+    },
+    {
+      "path": "src/assets/icons/setting2.png",
+      "sha1": "7009ed0c80dfb2ff9687e56a8bbd4993d7d7fb92"
+    },
+    {
+      "path": "src/assets/icons/tickB.png",
+      "sha1": "488a4a14ea6c257bcdffe2cbd790ba2b28acc0c6"
+    },
+    {
+      "path": "src/assets/icons/user.png",
+      "sha1": "3cfd9db8841eea139262a95687eb42bbaacb6e9f"
+    },
+    {
+      "path": "src/assets/icons/whatsapp.png",
+      "sha1": "85e835249a12fc9568435d45f40932c283a10d27"
+    },
+    {
+      "path": "src/assets/images/Res.png",
+      "sha1": "3126ef92b91f7e42ba249180a06a9008ae5940bb"
+    },
+    {
+      "path": "src/assets/images/coupan.png",
+      "sha1": "229a238b94a6e417efd5aed67f28089cba355b5a"
+    },
+    {
+      "path": "src/assets/images/drawerbg.png",
+      "sha1": "73234534036c1a99cd37e32de30332e42945c631"
+    },
+    {
+      "path": "src/assets/images/logo.png",
+      "sha1": "2e2e7054a1450794e23a4bc5983df3c3a189e17d"
+    },
+    {
+      "path": "src/assets/images/qr.png",
+      "sha1": "c739c9d0a8621830020969dfe6b018415684e450"
+    },
+    {
+      "path": "src/assets/images/resturent.png",
+      "sha1": "4551184f048c7da63e1851c3aae893e87f50e3f0"
+    },
+    {
+      "path": "src/assets/images/social-apple.png",
+      "sha1": "b07074445fff293f9de14189d9946bb8a556c403"
+    },
+    {
+      "path": "src/assets/images/social-facebook.png",
+      "sha1": "fccbbd3c0bfa44b508ca9da726844f01deb76f6d"
+    },
+    {
+      "path": "src/assets/images/social-google.png",
+      "sha1": "830e9d9a747d9c27ff33eefe42cc4337b586bea0"
+    },
+    {
+      "path": "src/assets/pattern/couponPatren.png",
+      "sha1": "4e0db01987e8d934ef8375608f049d4f8c47a0e9"
+    },
+    {
+      "path": "src/assets/pattern/pattern.png",
+      "sha1": "c537eec6375d44ce69918a0033e8684dc93013d5"
+    },
+    {
+      "path": "src/assets/pattern/pattern.svg",
+      "sha1": "ffe2d1d1d0a1337a5661e0c473bb78f551b1f323"
+    },
+    {
+      "path": "src/assets/splash/splash.jpg",
+      "sha1": "81afc0f695ddc32ff8a0f6eff4099c2d712e68de"
+    }
+  ]
+}

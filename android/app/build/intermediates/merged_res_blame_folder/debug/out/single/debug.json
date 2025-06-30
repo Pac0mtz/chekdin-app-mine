@@ -1,0 +1,218 @@
+[
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_eyeslash.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/eyeslash.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_coupan.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/coupan.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_message.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/message.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_eye.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/eye.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_setting.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/setting.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_whatsapp.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/whatsapp.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_facebook.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/facebook.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_res.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/res.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_search1.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/search1.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_resturent.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/resturent.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_pattern.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/pattern.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_check.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/check.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_search.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/search.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_arrowleft.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/arrowleft.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_splash.jpg.flat",
+        "source": "com.checkdinapp-main-56:/drawable/splash.jpg"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_home.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/home.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_qr.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/qr.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_camera.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/camera.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_tickb.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/tickb.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_logo.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/logo.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_coupons.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/coupons.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_socialapple.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/socialapple.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.checkdinapp-main-56:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_filter.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/filter.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_user.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/user.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_socialfacebook.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/socialfacebook.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_setting2.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/setting2.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_edit.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/edit.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_map.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/map.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_lightt.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/lightt.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_back.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/back.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_socialgoogle.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/socialgoogle.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_bluet.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/bluet.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_couponpatren.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/couponpatren.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.checkdinapp-main-56:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_logout.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/logout.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_greent.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/greent.png"
+    },
+    {
+        "merged": "com.checkdinapp-merged_res-54:/drawable_drawerbg.png.flat",
+        "source": "com.checkdinapp-main-56:/drawable/drawerbg.png"
+    }
+]

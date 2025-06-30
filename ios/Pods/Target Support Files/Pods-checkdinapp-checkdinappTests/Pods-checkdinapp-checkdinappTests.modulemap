@@ -1,0 +1,6 @@
+module Pods_checkdinapp_checkdinappTests {
+  umbrella header "Pods-checkdinapp-checkdinappTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
