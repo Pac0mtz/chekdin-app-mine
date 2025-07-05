@@ -25,11 +25,9 @@ export const getMerchentList = createAsyncThunk(
 export const filterMerchentList = createAsyncThunk(
   '/merchant/get-list/?',
   async (data, {getState}) => {
-    console.warn('data', data);
     const {user} = getState().auth;
     const accessToken = user?.data?.access_token;
     const response = await filterMerchantList(data, accessToken);
-    console.log('i am here getting list', response.data.length);
     return response;
   },
 );
@@ -52,6 +50,10 @@ export const merchentSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(getMerchentList.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
       .addCase(getMerchentList.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.merchantList = action.payload;

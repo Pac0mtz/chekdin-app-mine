@@ -1,0 +1,6 @@
+module ReactNativeGetLocation {
+  umbrella header "ReactNativeGetLocation-umbrella.h"
+
+  export *
+  module * { export * }
+}

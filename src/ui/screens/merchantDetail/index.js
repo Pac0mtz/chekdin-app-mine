@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   View,
   Text,
+  Animated,
   Image,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
   Linking,
   Platform,
+  Dimensions,
+  Toast,
 } from 'react-native';
 import resturent from '../../../assets/images/Res.png';
 import logo from '../../../assets/images/logo.png';
@@ -23,67 +26,74 @@ import LocationIcon from '../../../assets/svgs/location-icon';
 import WebsiteIcon from '../../../assets/svgs/web-icon';
 import FacebookIcon from '../../../assets/svgs/facebook-icon';
 
+const {height: SCREEN_HEIGHT, width: SCREEN_WIDTH} = Dimensions.get('window');
+const BASE_HEADER_HEIGHT = SCREEN_HEIGHT < 700 ? 200 : 240;
+const HEADER_HEIGHT = Math.round(BASE_HEADER_HEIGHT * 1.2);
+const PARALLAX_FACTOR = 0.5;
+
 const DetailMerchantScreen = ({route, navigation}) => {
   const data = route.params?.item;
+  const merchantId = data?.id;
   const [latLong, setLatLong] = useState('');
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollViewRef = useRef(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMerchantDetails(data?.id));
-    getCurrentLocation();
-  }, []);
-  const merchantList = useSelector(state => state.merchent.merchantDetails);
-  const item = merchantList?.data;
+
   const getCurrentLocation = async () => {
-    if (Platform.OS === 'ios') {
-      const auth = await Geolocation.requestAuthorization('whenInUse');
-      if (auth === 'granted') {
-        Geolocation.getCurrentPosition(
-          position => {
-            const {latitude, longitude} = position.coords;
-            let obj = {
-              latitude: latitude,
-              longitude: longitude,
-            };
-            setLatLong(obj);
-            console.warn(' latLong obj', latLong);
-          },
-          error => {
-            console.error(error);
-          },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-      }
-    }
-    if (Platform.OS === 'android') {
-      request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-        .then(result => {
-          Geolocation.getCurrentPosition(
-            position => {
-              const {latitude, longitude} = position.coords;
-              let obj = {
-                latitude: latitude,
-                longitude: longitude,
-              };
-              setLatLong(obj);
-            },
-            error => {
-              console.error(error);
-            },
-            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-          );
-        })
-        .catch(e => {
-          console.log('e', e);
-        });
+    try {
+      // You can add your geolocation logic here if needed
+      // For now, this is a safe placeholder that does nothing
+      return;
+    } catch (e) {
+      console.warn('getCurrentLocation error:', e);
     }
   };
+
+  useEffect(() => {
+    if (merchantId) {
+      dispatch(getMerchantDetails(merchantId));
+    }
+    getCurrentLocation();
+  }, [merchantId, dispatch]);
+  const merchantList = useSelector(state => state.merchent.merchantDetails);
+  const merchantStatus = useSelector(state => state.merchent.status);
+  const item = merchantList?.data;
+  
+  if (merchantStatus === 'loading') {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text>Loading merchant details...</Text>
+      </View>
+    );
+  }
+  
+  if (merchantStatus === 'failed' || !item) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text>Unable to load merchant details</Text>
+        <TouchableOpacity 
+          style={{ marginTop: 20, padding: 10, backgroundColor: '#02676C', borderRadius: 8 }}
+          onPress={() => navigation.goBack()}>
+          <Text style={{ color: 'white' }}>Go Back</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   const MENU_LINKS = [
     {
       id: 1,
       title: 'Phone',
       onClick: () => {
-        Linking.openURL(`tel://${item.contact_number}`);
+        if (item?.contact_number) {
+          Linking.openURL(`tel://${item.contact_number}`);
+        } else {
+          Toast.show({
+            type: 'info',
+            text1: 'Phone number not available',
+            text2: 'Please contact the merchant directly',
+          });
+        }
       },
       icon: <PhoneIcons />,
     },
@@ -97,7 +107,15 @@ const DetailMerchantScreen = ({route, navigation}) => {
       id: 3,
       title: 'Website',
       onClick: () => {
-        Linking.openURL(`${item.website}`);
+        if (item?.website) {
+          Linking.openURL(`${item.website}`);
+        } else {
+          Toast.show({
+            type: 'info',
+            text1: 'Website not available',
+            text2: 'Please contact the merchant directly',
+          });
+        }
       },
       icon: <WebsiteIcon />,
     },
@@ -128,10 +146,21 @@ const DetailMerchantScreen = ({route, navigation}) => {
     }
   };
   const openMapDirection = () => {
-    console.warn('latLong', data.latitude);
+    // Check if we have coordinates for the merchant
+    if (!item?.latitude || !item?.longitude) {
+      // If no coordinates, show a message or try to open maps with address
+      Toast.show({
+        type: 'info',
+        text1: 'Location not available',
+        text2: 'Please contact the merchant for directions',
+      });
+      return;
+    }
+
+    console.warn('latLong', item.latitude);
 
     const googleMapUrl = 'http://maps.google.com/maps?saddr=';
-    let pick = '&daddr=' + data.latitude + ',' + data.longitude;
+    let pick = '&daddr=' + item.latitude + ',' + item.longitude;
     let f = Platform.select({
       ios: () => {
         Linking.openURL(googleMapUrl + pick);
@@ -159,37 +188,55 @@ const DetailMerchantScreen = ({route, navigation}) => {
     const distance = R * c; // Distance in miles
     return distance;
   };
-  const distance = calculateDistance(
-    latLong.latitude,
-    latLong.longitude,
-    data.latitude,
-    data.longitude,
-  );
+  const distance = item?.latitude && item?.longitude && latLong?.latitude && latLong?.longitude 
+    ? calculateDistance(
+        latLong.latitude,
+        latLong.longitude,
+        item.latitude,
+        item.longitude,
+      )
+    : null;
   return (
     <View style={styles.container}>
-      <View style={styles.merchantImageContainer}>
-        {item?.profile_img_url ? (
-          <Image
-            source={{uri: item?.profile_img_url}}
-            style={styles.merchantImage}
-          />
-        ) : (
-          <Image source={resturent} style={styles.merchantImage} />
-        )}
+      <View style={styles.parallaxContainer}>
+        <Animated.Image
+          source={item?.profile_img_url ? {uri: item?.profile_img_url} : resturent}
+          style={[
+            styles.parallaxImage,
+            {
+              transform: [
+                {
+                  translateY: scrollY.interpolate({
+                    inputRange: [0, HEADER_HEIGHT],
+                    outputRange: [0, -HEADER_HEIGHT * PARALLAX_FACTOR],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              ],
+            },
+          ]}
+          resizeMode="cover"
+        />
         <TouchableOpacity
           style={styles.backButtonContainer}
           onPress={() => navigation.goBack()}>
           <Image source={BackIcon} style={styles.backButton} />
         </TouchableOpacity>
       </View>
-
-      <ScrollView>
+      <Animated.ScrollView
+        ref={scrollViewRef}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          {useNativeDriver: true}
+        )}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.merchantDetailsContainer}>
           <View style={styles.restaurantInfoContainer}>
             <Text style={styles.restaurantName}>{item?.name}</Text>
             <View style={styles.restaurantDestinationContainer}>
               <Text style={styles.restaurantDestinationText}>
-                {distance.toFixed(0)} mi
+                {distance ? distance.toFixed(0) + ' mi' : ''}
               </Text>
             </View>
           </View>
@@ -249,47 +296,50 @@ const DetailMerchantScreen = ({route, navigation}) => {
           )}
           <View style={styles.descriptionContainer}>
             <Text style={styles.heading}>Current Check-in Offer</Text>
-            {item?.coupon.map((item, index) => {
-              const textHeight = item.offer_title.length * 1.3; // Adjust as needed
-              return (
-                <View>
-                  <View style={{padding: 0}}>
-                    <Text style={{fontSize: 18, marginTop: 8, color: 'black'}}>
-                      {item.coupon_type}{' '}
-                    </Text>
-                  </View>
-                  <TouchableOpacity
-                    style={{
-                      ...styles.coupanImageContainer,
-                      // height: 80 + textHeight, // Initial height + text height
-                    }}
-                    key={index}
-                    onPress={() =>
-                      navigation.navigate('CouponDetails', {
-                        item,
-                        isMerchant: true,
-                      })
-                    }>
-                    <Image source={coupan} style={styles.coupanImage} />
-                    <Image source={logo} style={styles.logostyle} />
-                    <View style={styles.couponDetail}>
-                      <Text style={styles.couponDetailMain}>
-                        {item?.offer_title}
-                      </Text>
-                      <Text style={styles.couponDetailSub}>
-                        {item?.coupon_code}
-                      </Text>
-                      <Text style={styles.couponDetailSub}>
-                        Exp {item?.expiry_date}
+            {item?.coupon && Array.isArray(item.coupon) && item.coupon.length > 0 ? (
+              item.coupon.map((item, index) => {
+                const textHeight = item.offer_title.length * 1.3; // Adjust as needed
+                return (
+                  <View key={index}>
+                    <View style={{padding: 0}}>
+                      <Text style={{fontSize: 18, marginTop: 8, color: 'black'}}>
+                        {item.coupon_type}{' '}
                       </Text>
                     </View>
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
+                    <TouchableOpacity
+                      style={{
+                        ...styles.coupanImageContainer,
+                        // height: 80 + textHeight, // Initial height + text height
+                      }}
+                      onPress={() =>
+                        navigation.navigate('CouponDetails', {
+                          item,
+                          isMerchant: true,
+                        })
+                      }>
+                      <Image source={coupan} style={styles.coupanImage} />
+                      <Image source={logo} style={styles.logostyle} />
+                      <View style={styles.couponDetail}>
+                        <Text style={styles.couponDetailMain}>
+                          {item?.offer_title}
+                        </Text>
+                        <Text style={styles.couponDetailSub}>
+                          {item?.coupon_code}
+                        </Text>
+                        <Text style={styles.couponDetailSub}>
+                          Exp {item?.expiry_date}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                );
+              })
+            ) : (
+              <Text style={styles.noCouponsText}>No coupons available at this time.</Text>
+            )}
           </View>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 };
@@ -299,22 +349,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  merchantImageContainer: {
-    height: 240,
+  parallaxContainer: {
+    height: HEADER_HEIGHT,
     overflow: 'hidden',
-    borderBottomLeftRadius: 28,
-    borderBottomRightRadius: 28,
+    position: 'relative',
   },
-  merchantImage: {
+  parallaxImage: {
     width: '100%',
-    height: '100%',
+    height: HEADER_HEIGHT,
+    alignSelf: 'center',
   },
   backButtonContainer: {
     position: 'absolute',
     top: 40,
     left: 20,
-    backgroundColor: 'white',
-    padding: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 8,
     borderRadius: 100,
     shadowColor: '#000',
     shadowOffset: {
@@ -323,8 +373,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-
     elevation: 7,
+    zIndex: 10,
   },
   backButton: {
     width: 25,
@@ -428,6 +478,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
+  },
+  noCouponsText: {
+    fontSize: 14,
+    color: 'gray',
+    textAlign: 'center',
+    paddingTop: 12,
   },
 });
 

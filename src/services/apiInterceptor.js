@@ -39,14 +39,18 @@ api.interceptors.response.use(
     return response;
   },
   async error => {
-    // Remove session expiration logic for 401
+    // Handle 401 Unauthorized errors - clear session and redirect to login
     if (error.response && error.response.status === 401) {
-      Toast.show({
-        type: 'error',
-        text1: 'Unauthorized',
-        text2: 'You are not authorized to perform this action.',
-      });
-      return Promise.reject(error);
+      try {
+        // Clear session silently without showing logout message
+        await SessionManager.clearSession();
+        
+        // Don't show any toast message - just redirect to login
+        return Promise.reject(error);
+      } catch (clearError) {
+        console.error('Error clearing session:', clearError);
+        return Promise.reject(error);
+      }
     }
 
     // Handle network errors
@@ -103,28 +107,15 @@ api.interceptors.response.use(
       return Promise.reject(new Error(errorMessage));
     }
 
-    // Handle rate limiting (429)
-    if (error.response.status === 429) {
-      Toast.show({
-        type: 'error',
-        text1: 'Too Many Requests',
-        text2: 'Please wait a moment before trying again.',
-      });
-      return Promise.reject(
-        new Error('Too many requests. Please wait and try again.'),
-      );
-    }
-
     // Handle other errors
-    const errorMessage =
-      error.response.data?.message || 'An unexpected error occurred.';
+    const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
     Toast.show({
       type: 'error',
       text1: 'Error',
       text2: errorMessage,
     });
 
-    return Promise.reject(new Error(errorMessage));
+    return Promise.reject(error);
   },
 );
 

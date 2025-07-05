@@ -13,7 +13,6 @@ import resturent from '../../../assets/images/Res.png';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMerchentList} from '../../../slices/merchentSlice';
 import {getCouponList, getCouponStats} from '../../../slices/couponSlice';
-import CustomTabBar from '../../modules/CustomBottomTab';
 import SearchIcon from '../../../assets/icons/search1.png';
 import RadialChart from '../Home/RadialChart';
 
@@ -80,9 +79,24 @@ const CouponsList = ({route, navigation}) => {
         <View style={styles.cardFooter}>
           <View style={styles.merchantInfo}>
             <Text style={styles.merchantLabel}>Merchant</Text>
-            <Text style={styles.merchantName}>
-              {item?.merchant_name || 'Unknown'}
-            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                // Navigate to merchant details with the merchant ID
+                if (item?.merchant_id) {
+                  navigation.navigate('MerchantDetails', { 
+                    item: { 
+                      id: item.merchant_id,
+                      name: item.merchant_name,
+                      address: item.merchant_address || item.address
+                    } 
+                  });
+                }
+              }}
+              style={styles.merchantNameContainer}>
+              <Text style={styles.merchantName}>
+                {item?.merchant_name || 'Unknown'}
+              </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.expiryInfo}>
             <Text style={styles.expiryLabel}>Expires</Text>
@@ -120,7 +134,7 @@ const CouponsList = ({route, navigation}) => {
             <RadialChart
               series={[data?.checkdin_coupons || 0]}
               labels={['Chekdin']}
-              maxValue={totalCoupons}
+              maxValue={10}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -133,7 +147,7 @@ const CouponsList = ({route, navigation}) => {
             <RadialChart
               series={[data?.redeemed_coupons || 0]}
               labels={['Redeemed']}
-              maxValue={totalCoupons}
+              maxValue={10}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -146,7 +160,7 @@ const CouponsList = ({route, navigation}) => {
             <RadialChart
               series={[data?.user_coupons || 0]}
               labels={['Viewer']}
-              maxValue={totalCoupons}
+              maxValue={10}
             />
           </TouchableOpacity>
         </View>
@@ -168,7 +182,6 @@ const CouponsList = ({route, navigation}) => {
           )}
         />
       </ScrollView>
-      <CustomTabBar />
     </View>
   );
 };
@@ -213,17 +226,18 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     backgroundColor: 'white',
-    borderRadius: 16,
-    marginBottom: 16,
+    borderRadius: 12,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowOpacity: 0.10,
+    shadowRadius: 4,
+    elevation: 4,
     overflow: 'hidden',
+    minHeight: 60,
   },
   cardImageContainer: {
     position: 'relative',
@@ -249,20 +263,20 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
   },
   cardInfo: {
-    padding: 16,
+    padding: 8,
   },
   restaurantName: {
-    fontSize: 18,
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 4,
     fontFamily: 'Poppins-Bold',
   },
   address: {
-    fontSize: 14,
+    fontSize: 10,
     color: '#666',
-    marginBottom: 16,
-    lineHeight: 20,
+    marginBottom: 8,
+    lineHeight: 14,
     fontFamily: 'Poppins-Regular',
   },
   cardFooter: {
@@ -282,11 +296,17 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontFamily: 'Poppins-Regular',
   },
+  merchantNameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   merchantName: {
     fontSize: 14,
     color: '#333',
     fontWeight: '600',
     fontFamily: 'Poppins-Medium',
+    textDecorationLine: 'underline',
+    color: '#02676C',
   },
   expiryInfo: {
     alignItems: 'flex-end',
@@ -308,6 +328,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 20,
+  },
+  couponDetailMain: {
+    color: 'black',
+    fontWeight: '600',
+    fontSize: 10,
+    lineHeight: 14,
+    width: '80%',
+  },
+  couponDetailSub: {
+    color: 'black',
+    fontWeight: '400',
+    fontSize: 10,
+    lineHeight: 12,
   },
 });
 

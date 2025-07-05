@@ -11,7 +11,7 @@ const RadialChart = ({
   size = 115,
   delay = 0,
 }) => {
-  const strokeWidth = 9;
+  const strokeWidth = 12;
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
 

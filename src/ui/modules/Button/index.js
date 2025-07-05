@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
+    paddingHorizontal: 10,
   },
   disabledButton: {
     opacity: 0.7,

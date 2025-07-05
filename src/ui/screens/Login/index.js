@@ -8,6 +8,7 @@ import {
   Platform,
   PermissionsAndroid,
   KeyboardAvoidingView,
+  TouchableOpacity,
 } from 'react-native';
 import {login, pushNoti, socialLogin} from '../../../slices/authSlice';
 import { clearCouponView } from '../../../slices/couponSlice';
@@ -34,6 +35,8 @@ const Login = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const loading = useSelector(state => state.auth.loginStatus === 'loading');
+  const loginStatus = useSelector(state => state.auth.loginStatus);
+  const loginError = useSelector(state => state.auth.error);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -99,6 +102,8 @@ const Login = ({navigation}) => {
 
   async function onFacebookButtonPress() {
     try {
+      console.log('Starting Facebook login...');
+      
       // Attempt login with permissions
       const result = await LoginManager.logInWithPermissions([
         'public_profile',
@@ -106,49 +111,72 @@ const Login = ({navigation}) => {
       ]);
 
       if (result.isCancelled) {
-        throw 'User cancelled the login process';
+        console.log('User cancelled Facebook login');
+        return;
       }
 
       // Once signed in, get the user's AccessToken
       const data = await AccessToken.getCurrentAccessToken();
-      console.warn('data for face', data);
+      console.log('Facebook access token data:', data);
+      
       if (!data) {
-        throw 'Something went wrong obtaining access token';
+        throw new Error('Failed to obtain Facebook access token');
       }
 
       const tokenFb = data?.accessToken;
+      
+      // Get user data from Facebook Graph API
       const response = await fetch(
         `https://graph.facebook.com/me?fields=id,first_name,last_name,email&access_token=${tokenFb}`,
       );
       const userData = await response.json();
-      console.log('userData', userData.email);
+      console.log('Facebook user data:', userData);
+
+      if (!userData.email) {
+        throw new Error('Email not available from Facebook');
+      }
 
       // Create a Firebase credential with the AccessToken
       const facebookCredential = auth.FacebookAuthProvider.credential(tokenFb);
-      console.log('facebookCredential', facebookCredential);
+      console.log('Firebase Facebook credential created');
 
       // Sign in with Firebase credential
-      await auth().signInWithCredential(facebookCredential);
+      const firebaseResult = await auth().signInWithCredential(facebookCredential);
+      console.log('Firebase sign-in result:', firebaseResult);
 
       const user = auth().currentUser;
-      console.log('user ==> on fb', user);
+      console.log('Firebase current user:', user);
 
       if (user) {
-        // Check if the user's email is available in provider data
-        const email = user.providerData[0]?.email || null;
-
         const token = await user.getIdToken();
-        console.log('Firebase Auth Token on Facebook:', token);
+        console.log('Firebase ID token obtained');
 
-        // Dispatch the socialLogin action with token and email
-        dispatch(socialLogin({token: token, email: userData.email}));
+        // Prepare data for social login API
+        const socialLoginData = {
+          token: token,
+          email: userData.email,
+          name: `${userData.first_name || ''} ${userData.last_name || ''}`.trim(),
+          provider: 'facebook',
+          provider_id: userData.id
+        };
+
+        console.log('Dispatching social login with data:', socialLoginData);
+        
+        // Dispatch the socialLogin action
+        const result = await dispatch(socialLogin(socialLoginData));
+        console.log('Social login dispatch result:', result);
+        
         dispatch(clearCouponView());
-        return; // Add this return statement to exit the function here
       } else {
-        console.log('No user found');
+        throw new Error('No Firebase user found after authentication');
       }
     } catch (error) {
       console.error('Error during Facebook login:', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Facebook Login Failed',
+        text2: error.message || 'Please try again',
+      });
     }
   }
 
@@ -161,93 +189,176 @@ const Login = ({navigation}) => {
 
   const googleSignIn = async () => {
     try {
+      console.log('Starting Google Sign-In...');
+      
       await GoogleSignin.hasPlayServices();
-      let {idToken} = await GoogleSignin.signIn();
-      console.warn('idToken', idToken);
+      const {idToken, user: googleUser} = await GoogleSignin.signIn();
+      console.log('Google Sign-In result:', {idToken, user: googleUser});
+      
+      if (!idToken) {
+        throw new Error('Failed to obtain Google ID token');
+      }
+
       // Create a GoogleAuthProvider credential using the Google Sign-In ID token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      console.log('Firebase Google credential created');
 
       // Sign in to Firebase with the Google credential
-      console.log('googleCredential==>', googleCredential);
-
-      await auth().signInWithCredential(googleCredential);
+      const firebaseResult = await auth().signInWithCredential(googleCredential);
+      console.log('Firebase sign-in result:', firebaseResult);
 
       // Get the user's Firebase authentication token
       const user = auth().currentUser;
-      console.log('user ==> on fb', user);
+      console.log('Firebase current user:', user);
 
       if (user) {
         const token = await user.getIdToken();
-        console.log('token==>', token);
+        console.log('Firebase ID token obtained');
 
-        dispatch(socialLogin({token: token}));
+        // Prepare data for social login API
+        const socialLoginData = {
+          token: token,
+          email: googleUser?.email || user.email,
+          name: googleUser?.name || user.displayName,
+          provider: 'google',
+          provider_id: googleUser?.id || user.uid
+        };
+
+        console.log('Dispatching social login with data:', socialLoginData);
+        
+        // Dispatch the socialLogin action
+        const result = await dispatch(socialLogin(socialLoginData));
+        console.log('Social login dispatch result:', result);
+        
         dispatch(clearCouponView());
-        isMounted = true;
-
-        return; // Add this return statement to exit the function here
       } else {
-        console.log('No user found');
+        throw new Error('No Firebase user found after authentication');
       }
     } catch (error) {
       console.error('Google Sign-In Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Google Sign-In Failed',
+        text2: error.message || 'Please try again',
+      });
     }
   };
 
   async function onAppleButtonPress() {
-    // Start the sign-in request
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      // As per the FAQ of react-native-apple-authentication, the name should come first in the following array.
-      // See: https://github.com/invertase/react-native-apple-authentication#faqs
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
-
-    // Ensure Apple returned a user identityToken
-    if (!appleAuthRequestResponse.identityToken) {
-      throw new Error('Apple Sign-In failed - no identify token returned');
-    }
-
-    // Create a Firebase credential from the response
-    const {identityToken, nonce} = appleAuthRequestResponse;
-    const appleCredential = auth.AppleAuthProvider.credential(
-      identityToken,
-      nonce,
-    );
-
-    await auth().signInWithCredential(appleCredential);
-    const user = auth().currentUser;
-
-    if (user) {
-      await auth().currentUser.updateProfile({
-        displayName:
-          appleAuthRequestResponse?.fullName?.givenName +
-          ' ' +
-          appleAuthRequestResponse?.fullName?.familyName,
-        email: appleAuthRequestResponse?.email,
+    try {
+      console.log('Starting Apple Sign-In...');
+      
+      // Start the sign-in request
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        // As per the FAQ of react-native-apple-authentication, the name should come first in the following array.
+        // See: https://github.com/invertase/react-native-apple-authentication#faqs
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       });
 
-      const updatedUser = auth().currentUser;
-      const token = await updatedUser.getIdToken();
+      console.log('Apple auth response:', appleAuthRequestResponse);
 
-      dispatch(
-        socialLogin({
-          token: token,
-          name:
-            appleAuthRequestResponse?.fullName?.givenName +
-            ' ' +
-            appleAuthRequestResponse?.fullName?.familyName,
-        }),
+      // Ensure Apple returned a user identityToken
+      if (!appleAuthRequestResponse.identityToken) {
+        throw new Error('Apple Sign-In failed - no identify token returned');
+      }
+
+      // Create a Firebase credential from the response
+      const {identityToken, nonce} = appleAuthRequestResponse;
+      const appleCredential = auth.AppleAuthProvider.credential(
+        identityToken,
+        nonce,
       );
-      dispatch(clearCouponView());
-      isMounted = true;
 
-      return; // Add this return statement to exit the function here
-    } else {
-      console.log('No user found');
+      console.log('Firebase Apple credential created');
+
+      const firebaseResult = await auth().signInWithCredential(appleCredential);
+      console.log('Firebase sign-in result:', firebaseResult);
+      
+      const user = auth().currentUser;
+      console.log('Firebase current user:', user);
+
+      if (user) {
+        // Update user profile if name is available
+        if (appleAuthRequestResponse?.fullName) {
+          await auth().currentUser.updateProfile({
+            displayName:
+              appleAuthRequestResponse?.fullName?.givenName +
+              ' ' +
+              appleAuthRequestResponse?.fullName?.familyName,
+            email: appleAuthRequestResponse?.email,
+          });
+        }
+
+        const updatedUser = auth().currentUser;
+        const token = await updatedUser.getIdToken();
+        console.log('Firebase ID token obtained');
+
+        // Prepare data for social login API
+        const socialLoginData = {
+          token: token,
+          email: appleAuthRequestResponse?.email || user.email,
+          name: appleAuthRequestResponse?.fullName ? 
+            `${appleAuthRequestResponse?.fullName?.givenName || ''} ${appleAuthRequestResponse?.fullName?.familyName || ''}`.trim() :
+            user.displayName,
+          provider: 'apple',
+          provider_id: user.uid
+        };
+
+        console.log('Dispatching social login with data:', socialLoginData);
+        
+        // Dispatch the socialLogin action
+        const result = await dispatch(socialLogin(socialLoginData));
+        console.log('Social login dispatch result:', result);
+        
+        dispatch(clearCouponView());
+      } else {
+        throw new Error('No Firebase user found after authentication');
+      }
+    } catch (error) {
+      console.error('Apple Sign-In Error:', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Apple Sign-In Failed',
+        text2: error.message || 'Please try again',
+      });
     }
-    // Sign the user in with the credential
-    // return auth().signInWithCredential(appleCredential);
   }
+
+  useEffect(() => {
+    console.log('isMounted', isMounted);
+    if (loginStatus === 'succeeded' && isMounted) {
+      Toast.show({
+        type: 'success',
+        text1: 'Login successful!',
+      });
+      isMounted = false;
+    } else if (loginStatus === 'failed' && isMounted) {
+      Toast.show({
+        type: 'error',
+        text1: loginError,
+      });
+      isMounted = false;
+    }
+  }, [loginStatus, loginError]);
+
+  // Monitor social login status
+  useEffect(() => {
+    console.log('Social login status changed:', loginStatus, 'Error:', loginError);
+    if (loginStatus === 'succeeded') {
+      Toast.show({
+        type: 'success',
+        text1: 'Social login successful!',
+        text2: 'Welcome to ChekdIn!',
+      });
+    } else if (loginStatus === 'failed' && loginError) {
+      Toast.show({
+        type: 'error',
+        text1: 'Social Login Failed',
+        text2: loginError,
+      });
+    }
+  }, [loginStatus, loginError]);
 
   return (
     <KeyboardAvoidingView 
@@ -302,7 +413,7 @@ const Login = ({navigation}) => {
                 <SocialButton title={'apple'} onPress={onAppleButtonPress} />
               )}
             </View>
-
+            
             <View style={styles.createAccountContainer}>
               <Text style={styles.createAccountText}>
                 Not Registered Yet?{' '}

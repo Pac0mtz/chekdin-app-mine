@@ -11,6 +11,13 @@ import {
   sendCheckinRequest,
   checkScanCouponData,
 } from '../services/couponservice';
+import {
+  verifySocialMediaPost,
+  getVerificationStatus,
+  submitVerificationProof,
+  canClaimCoupon,
+  getRequiredPlatforms,
+} from '../services/socialMediaVerificationService';
 
 const initialState = {
   user: null,
@@ -22,6 +29,13 @@ const initialState = {
   checkScanDataStatus: 'idle',
   viewCouponErr: 'idle',
   couponViewStatus: 'idle',
+  // Social Media Verification States
+  verificationStatus: 'idle',
+  verificationError: null,
+  canClaimStatus: 'idle',
+  canClaimError: null,
+  requiredPlatforms: [],
+  verificationProof: null,
 };
 
 export const getCouponList = createAsyncThunk(
@@ -113,6 +127,57 @@ export const addRedeemCoupon = createAsyncThunk(
     const {user} = getState().auth;
     const accessToken = user?.data?.access_token;
     const response = await RedeemCoupon(id, accessToken);
+    return response;
+  },
+);
+
+// Social Media Verification Actions
+export const verifySocialMediaPostAction = createAsyncThunk(
+  '/coupon/verify-social-post',
+  async (verificationData, {getState}) => {
+    const {user} = getState().auth;
+    const accessToken = user?.data?.access_token;
+    const response = await verifySocialMediaPost(accessToken, verificationData);
+    return response;
+  },
+);
+
+export const getVerificationStatusAction = createAsyncThunk(
+  '/coupon/verification-status',
+  async (couponId, {getState}) => {
+    const {user} = getState().auth;
+    const accessToken = user?.data?.access_token;
+    const response = await getVerificationStatus(accessToken, couponId);
+    return response;
+  },
+);
+
+export const submitVerificationProofAction = createAsyncThunk(
+  '/coupon/submit-verification',
+  async (proofData, {getState}) => {
+    const {user} = getState().auth;
+    const accessToken = user?.data?.access_token;
+    const response = await submitVerificationProof(accessToken, proofData);
+    return response;
+  },
+);
+
+export const canClaimCouponAction = createAsyncThunk(
+  '/coupon/can-claim',
+  async (couponId, {getState}) => {
+    const {user} = getState().auth;
+    const accessToken = user?.data?.access_token;
+    const response = await canClaimCoupon(accessToken, couponId);
+    return response;
+  },
+);
+
+export const getRequiredPlatformsAction = createAsyncThunk(
+  '/coupon/required-platforms',
+  async (couponId, {getState}) => {
+    const {user} = getState().auth;
+    const accessToken = user?.data?.access_token;
+    const response = await getRequiredPlatforms(accessToken, couponId);
     return response;
   },
 );
@@ -237,6 +302,67 @@ export const merchentSlice = createSlice({
         console.warn('CouponView rejected', action.error);
         state.status = 'failed';
         state.couponViewStatus = 'failed';
+      })
+      // Social Media Verification Reducers
+      .addCase(verifySocialMediaPostAction.pending, (state) => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(verifySocialMediaPostAction.fulfilled, (state, action) => {
+        state.verificationStatus = 'succeeded';
+        state.verificationProof = action.payload;
+      })
+      .addCase(verifySocialMediaPostAction.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action?.error?.message ?? 'Verification failed';
+      })
+      .addCase(getVerificationStatusAction.pending, (state) => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(getVerificationStatusAction.fulfilled, (state, action) => {
+        state.verificationStatus = 'succeeded';
+        state.verificationProof = action.payload;
+      })
+      .addCase(getVerificationStatusAction.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action?.error?.message ?? 'Failed to get verification status';
+      })
+      .addCase(submitVerificationProofAction.pending, (state) => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(submitVerificationProofAction.fulfilled, (state, action) => {
+        state.verificationStatus = 'succeeded';
+        state.verificationProof = action.payload;
+      })
+      .addCase(submitVerificationProofAction.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action?.error?.message ?? 'Failed to submit verification proof';
+      })
+      .addCase(canClaimCouponAction.pending, (state) => {
+        state.canClaimStatus = 'loading';
+        state.canClaimError = null;
+      })
+      .addCase(canClaimCouponAction.fulfilled, (state, action) => {
+        state.canClaimStatus = 'succeeded';
+        state.canClaimResult = action.payload;
+      })
+      .addCase(canClaimCouponAction.rejected, (state, action) => {
+        state.canClaimStatus = 'failed';
+        state.canClaimError = action?.error?.message ?? 'Failed to check claim eligibility';
+      })
+      .addCase(getRequiredPlatformsAction.pending, (state) => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(getRequiredPlatformsAction.fulfilled, (state, action) => {
+        state.verificationStatus = 'succeeded';
+        state.requiredPlatforms = action.payload?.data || [];
+      })
+      .addCase(getRequiredPlatformsAction.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action?.error?.message ?? 'Failed to get required platforms';
       });
   },
 });

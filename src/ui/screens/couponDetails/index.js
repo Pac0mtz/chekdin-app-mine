@@ -22,11 +22,13 @@ import {
   addRedeemCoupon,
   getCouponDetails,
   getCouponStats,
+  canClaimCouponAction,
 } from '../../../slices/couponSlice';
 import Button from '../../modules/Button';
 // import Share from 'react-native-share';
 import {request, PERMISSIONS} from 'react-native-permissions';
 import CustomModal from '../../modules/Modal';
+import SocialMediaVerificationModal from '../../modules/SocialMediaVerificationModal';
 import Geolocation from 'react-native-geolocation-service';
 import messaging from '@react-native-firebase/messaging';
 
@@ -52,6 +54,10 @@ const DetailCouponScreen = ({route, navigation}) => {
   // console.log('redeemFcm', redeemFcm);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState(null);
+  
+  // Social Media Verification States
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [verificationChecked, setVerificationChecked] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -107,7 +113,7 @@ const DetailCouponScreen = ({route, navigation}) => {
   const couponList = useSelector(state => state.coupon.couponDetails);
   const item = couponList?.data;
 
-  const onConfirm = async () => {
+    const onConfirm = async () => {
     seIstModalVisible(false);
     if (modalType === 'action') {
       setIsLoading(true);
@@ -165,14 +171,55 @@ const DetailCouponScreen = ({route, navigation}) => {
             lat: location.latitude,
             long: location.longitude,
             fcm_token: fcmToken,
-          }),
-        );
+            }),
+          );
         navigation.navigate('Dashboard');
         setIsLoading(false);
       } else {
         setIsLoading(false);
       }
     }
+  };
+
+  // Check if user can claim coupon (has verified social media post)
+  const checkClaimEligibility = async () => {
+    try {
+      const result = await dispatch(canClaimCouponAction(data?.id));
+      return result.payload?.data?.can_claim || false;
+    } catch (error) {
+      console.error('Error checking claim eligibility:', error);
+      return false;
+    }
+  };
+
+  // Handle redeem button press with verification
+  const handleRedeemPress = async () => {
+    if (verificationChecked) {
+      // User has already been verified, proceed with redemption
+      setModalType('action');
+      setModalText('Are you sure you want to redeem?');
+      seIstModalVisible(true);
+    } else {
+      // Check if user can claim without verification
+      const canClaim = await checkClaimEligibility();
+      if (canClaim) {
+        setVerificationChecked(true);
+        setModalType('action');
+        setModalText('Are you sure you want to redeem?');
+        seIstModalVisible(true);
+      } else {
+        // Show verification modal
+        setShowVerificationModal(true);
+      }
+    }
+  };
+
+  // Handle verification success
+  const handleVerificationSuccess = () => {
+    setVerificationChecked(true);
+    setModalType('action');
+    setModalText('Are you sure you want to redeem?');
+    seIstModalVisible(true);
   };
 
   const handleWebsitePress = async url => {
@@ -302,12 +349,8 @@ const DetailCouponScreen = ({route, navigation}) => {
             !isRedeem &&
             !isMerchant && (
               <Button
-                title={'Redeem Now'}
-                onPress={() => {
-                  setModalType('action');
-                  setModalText('Are you sure you want to redeem?');
-                  seIstModalVisible(true);
-                }}
+                title={verificationChecked ? 'Redeem Now' : 'Share & Redeem'}
+                onPress={handleRedeemPress}
               />
             )
           )}
@@ -318,6 +361,14 @@ const DetailCouponScreen = ({route, navigation}) => {
             onCancel={() => seIstModalVisible(false)}
             onConfirm={onConfirm}
             BtnText={BtnText}
+          />
+          
+          <SocialMediaVerificationModal
+            visible={showVerificationModal}
+            onClose={() => setShowVerificationModal(false)}
+            couponData={data}
+            onVerificationSuccess={handleVerificationSuccess}
+            navigation={navigation}
           />
         </View>
       </ScrollView>

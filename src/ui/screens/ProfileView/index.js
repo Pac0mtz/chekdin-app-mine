@@ -17,6 +17,7 @@ import Button from '../../modules/Button';
 import {launchImageLibrary} from 'react-native-image-picker';
 import mime from 'mime';
 import Toast from 'react-native-toast-message';
+import Loader from '../../elements/Loader';
 
 const ProfileView = ({navigation, route}) => {
   const {isCompletingProfile} = route.params || {};
@@ -26,8 +27,10 @@ const ProfileView = ({navigation, route}) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isSocialLoginUser, setIsSocialLoginUser] = useState(false);
 
   const profile = useSelector(state => state.auth.profile);
+  const profileStatus = useSelector(state => state.auth.status);
   const profileUpdateStatus = useSelector(
     state => state.auth.profileUpdateStatus,
   );
@@ -43,6 +46,9 @@ const ProfileView = ({navigation, route}) => {
       setPhone(profile.data.phone_number || '');
       setEmail(profile.data.email || '');
       setSelectedImage(profile.data.profile_img_url);
+      
+      // Check if user is a social login user (has provider_id)
+      setIsSocialLoginUser(!!profile.data.provider_id);
     }
   }, [profile]);
 
@@ -67,6 +73,31 @@ const ProfileView = ({navigation, route}) => {
   };
 
   const handleSubmit = () => {
+    // Validation for social login users
+    if (isSocialLoginUser) {
+      if (!name.trim()) {
+        Toast.show({
+          type: 'error',
+          text1: 'Name is required for social login users',
+        });
+        return;
+      }
+      if (!phone.trim()) {
+        Toast.show({
+          type: 'error',
+          text1: 'Phone number is required for social login users',
+        });
+        return;
+      }
+      if (!email.trim()) {
+        Toast.show({
+          type: 'error',
+          text1: 'Email is required for social login users',
+        });
+        return;
+      }
+    }
+
     if (phone.length < 10) {
       Toast.show({
         type: 'error',
@@ -115,6 +146,9 @@ const ProfileView = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
+      {profileStatus === 'loading' && (
+        <Loader message="Loading profile..." />
+      )}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {isCompletingProfile && (
           <View style={styles.infoMessageContainer}>
@@ -124,22 +158,36 @@ const ProfileView = ({navigation, route}) => {
             </Text>
           </View>
         )}
-        <View style={styles.logoContainer}>
-          <View style={styles.imageContainer}>
-            <View style={styles.userImageContainer}>
+        
+        {/* Social Login User Notice */}
+        {isSocialLoginUser && (
+          <View style={styles.socialLoginNotice}>
+            <Text style={styles.socialLoginNoticeText}>
+              Social Login User - You can edit your name, email, and phone number
+            </Text>
+          </View>
+        )}
+        
+        {/* Profile Image Section */}
+        <View style={styles.profileImageSection}>
+          <View style={styles.profileImageContainer}>
+            <View style={styles.profileImageWrapper}>
               {selectedImage ? (
-                <Image source={{uri: selectedImage}} style={styles.userImage} />
+                <Image source={{uri: selectedImage}} style={styles.profileImage} />
               ) : (
-                <Image source={User} style={styles.userImage} />
+                <Image source={User} style={styles.profileImage} />
               )}
+              <View style={styles.profileImageOverlay} />
             </View>
             <TouchableOpacity
               style={styles.cameraButton}
               onPress={handleCameraPress}>
-              <Image source={Camera} />
+              <Image source={Camera} style={styles.cameraIcon} />
             </TouchableOpacity>
           </View>
+          <Text style={styles.profileImageText}>Tap to change photo</Text>
         </View>
+        
         <KeyboardAvoidingView style={styles.contentContainer}>
           <TextInputField
             placeholder="Name"
@@ -150,8 +198,10 @@ const ProfileView = ({navigation, route}) => {
           <TextInputField
             placeholder="Email"
             value={email}
-            isEditable={false}
+            onChangeText={setEmail}
+            isEditable={isSocialLoginUser} // Make email editable for social login users
             custom={true}
+            keyboardType="email-address"
           />
           <TextInputField
             placeholder="Phone Number"
@@ -172,6 +222,9 @@ const ProfileView = ({navigation, route}) => {
       <View style={styles.buttonContainer}>
         <Button title={'Save'} onPress={handleSubmit} />
       </View>
+      {profileUpdateStatus === 'loading' && (
+        <Loader message="Updating profile..." />
+      )}
     </View>
   );
 };
@@ -187,59 +240,114 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 20,
   },
-  logoContainer: {
+  profileImageSection: {
     alignItems: 'center',
+    marginBottom: 30,
   },
-  contentContainer: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  imageContainer: {
+  profileImageContainer: {
     position: 'relative',
-    alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
   },
-  userImageContainer: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    backgroundColor: 'lightgray',
-    borderWidth: 4,
-    borderColor: 'white',
+  profileImageWrapper: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    elevation: 8,
     overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderWidth: 4,
+    borderColor: '#fff',
   },
-  userImage: {
+  profileImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    borderRadius: 66,
+  },
+  profileImageOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: 66,
+    backgroundColor: 'rgba(2, 103, 108, 0.1)',
   },
   cameraButton: {
     position: 'absolute',
-    bottom: 5,
-    right: 5,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 8,
+    bottom: 8,
+    right: 8,
+    backgroundColor: '#02676C',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 6,
+    borderWidth: 3,
+    borderColor: '#fff',
+  },
+  cameraIcon: {
+    width: 24,
+    height: 24,
+    tintColor: '#fff',
+  },
+  profileImageText: {
+    color: '#02676C',
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  contentContainer: {
+    width: '100%',
+    marginTop: 20,
   },
   buttonContainer: {
     paddingHorizontal: 30,
     paddingBottom: 20,
   },
   infoMessageContainer: {
-    backgroundColor: '#E0F2F1',
+    backgroundColor: '#F0FFFD',
     padding: 15,
     borderRadius: 10,
     marginBottom: 20,
-    width: '100%',
+    borderWidth: 1,
+    borderColor: '#02676C',
   },
   infoMessageText: {
-    color: '#00796B',
+    color: '#02676C',
     textAlign: 'center',
     fontSize: 14,
+    lineHeight: 20,
+  },
+  socialLoginNotice: {
+    backgroundColor: '#FFF3CD',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#FFEAA7',
+  },
+  socialLoginNoticeText: {
+    color: '#856404',
+    textAlign: 'center',
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '500',
   },
 });
 

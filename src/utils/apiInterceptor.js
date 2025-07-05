@@ -45,17 +45,15 @@ apiClient.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    // Handle 401 Unauthorized errors
+    // Handle 401 Unauthorized errors - clear session and redirect to login
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // Clear session and redirect to login
+        // Clear session silently without showing logout message
         await SessionManager.clearSession();
         
-        // Instead of showing 'Session Expired', show a generic error or nothing
-
-        // You can add navigation logic here if needed
+        // Don't show any toast message - just redirect to login
         return Promise.reject(error);
       } catch (clearError) {
         console.error('Error clearing session:', clearError);

@@ -160,11 +160,7 @@ class PermissionHandler {
 
       case RESULTS.GRANTED:
         console.log(`${permissionName} permission granted`);
-        Toast.show({
-          type: 'success',
-          text1: 'Permission Granted',
-          text2: `${permissionName} permission granted successfully.`,
-        });
+        // No toast for granted
         return true;
 
       case RESULTS.BLOCKED:

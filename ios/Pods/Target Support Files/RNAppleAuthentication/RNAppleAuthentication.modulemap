@@ -1,0 +1,6 @@
+module RNAppleAuthentication {
+  umbrella header "RNAppleAuthentication-umbrella.h"
+
+  export *
+  module * { export * }
+}

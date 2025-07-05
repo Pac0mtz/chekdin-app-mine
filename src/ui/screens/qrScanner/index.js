@@ -7,20 +7,74 @@ import {
   View,
   Button,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
-import {checkScanData} from '../../../slices/couponSlice';
+import {checkScanData, getCouponStats} from '../../../slices/couponSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {BASEURL} from '../../../constants/api';
+import Geolocation from 'react-native-geolocation-service';
+import {request, PERMISSIONS} from 'react-native-permissions';
+import messaging from '@react-native-firebase/messaging';
 
 const Scanner = () => {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const [reactivate, setReactivate] = useState(true); // Control scanner reactivation
+  const [location, setLocation] = useState(null);
+  const [fcmToken, setFcmToken] = useState(null);
   const dispatch = useDispatch();
   const scannerRef = useRef();
+
+  useEffect(() => {
+    getCurrentLocation();
+    requestUserPermission();
+  }, []);
+
+  const getCurrentLocation = async () => {
+    if (Platform.OS === 'ios') {
+      const auth = await Geolocation.requestAuthorization('whenInUse');
+      if (auth === 'granted') {
+        Geolocation.getCurrentPosition(
+          position => {
+            const {latitude, longitude} = position.coords;
+            setLocation({latitude, longitude});
+          },
+          error => {
+            console.error(error);
+          },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    }
+
+    if (Platform.OS === 'android') {
+      request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+        .then(result => {
+          Geolocation.getCurrentPosition(
+            position => {
+              const {latitude, longitude} = position.coords;
+              setLocation({latitude, longitude});
+            },
+            error => {
+              console.error(error);
+            },
+            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+          );
+        })
+        .catch(e => {
+          console.log('e', e);
+        });
+    }
+  };
+
+  async function requestUserPermission() {
+    await messaging().registerDeviceForRemoteMessages();
+    const token = await messaging().getToken();
+    setFcmToken(token);
+  }
 
   const handleQRCodeScanned = async ({data}) => {
     // Prevent multiple scans while processing
@@ -36,7 +90,7 @@ const Scanner = () => {
       let id = newData.id;
       const scanCheckin = new FormData();
       scanCheckin.append('coupon', id);
-      const couponList = dispatch(checkScanData(scanCheckin));
+      const couponList = await dispatch(checkScanData(scanCheckin));
       checkData(couponList, data);
     } catch (error) {
       console.warn('catch ', error);
@@ -61,16 +115,32 @@ const Scanner = () => {
       });
       setReactivate(true);
     } else if (list.payload && list.payload.status === 200) {
-      // Navigate using replace to unmount component
+      // Success case - navigate to rolling screen
+      Toast.show({
+        type: 'success',
+        text1: 'Coupon successfully added!',
+      });
       navigation.replace('Rolling', {data});
     } else if (
       list.error &&
       list.error.message === 'Request failed with status code 422'
     ) {
+      // Coupon already added - treat as success
       Toast.show({
-        type: 'error',
-        text1: 'The Coupon is already added to viewer coupon',
+        type: 'success',
+        text1: 'Coupon already added to your list!',
       });
+      // Refresh coupon stats and navigate to MyCoupons to show the user's coupons
+      if (location && fcmToken) {
+        dispatch(
+          getCouponStats({
+            lat: location.latitude,
+            long: location.longitude,
+            fcm_token: fcmToken,
+          }),
+        );
+      }
+      navigation.replace('MyCoupons', { user_coupons: true });
       setReactivate(true);
     } else if (
       list.error &&

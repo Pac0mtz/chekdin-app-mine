@@ -1,0 +1,1 @@
+../../../Target Support Files/react-native-geocoder/react-native-geocoder-umbrella.h

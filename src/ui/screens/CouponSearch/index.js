@@ -21,7 +21,7 @@ import { request, PERMISSIONS } from 'react-native-permissions';
 const CouponSearchScreen = ({ navigation }) => {
   console.log('CouponSearchScreen rendered');
   const [search, setSearch] = useState('');
-  const [radius, setRadius] = useState(20);
+  const [radius, setRadius] = useState(30);
   const [latLong, setLatLong] = useState({ latitude: null, longitude: null });
   const dispatch = useDispatch();
 

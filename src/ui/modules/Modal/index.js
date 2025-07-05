@@ -3,7 +3,6 @@ import {View, Text, Modal, TouchableOpacity, Image} from 'react-native';
 import fbIcon from '../../../assets/icons/facebook.png';
 import messageIcon from '../../../assets/icons/message.png';
 import whatsappIcon from '../../../assets/icons/whatsapp.png';
-import instagramIcon from '../../../assets/icons/instagram.png';
 import linkedinIcon from '../../../assets/icons/linkedin.png';
 import BT from '../../../assets/icons/bluet.png';
 import LT from '../../../assets/icons/lightT.png';
@@ -35,11 +34,11 @@ const CustomModal = ({
 
   let trueCount;
   useEffect(() => {
-    const {isFacebook, isWhatsapp, isSMS, isInstagram, isLinkedIn} =
+    const {isFacebook, isWhatsapp, isSMS, isTwitter, isLinkedIn} =
       platform || {};
 
     // Count the number of true values
-    trueCount = [isFacebook, isWhatsapp, isSMS, isInstagram, isLinkedIn].filter(
+    trueCount = [isFacebook, isWhatsapp, isSMS, isTwitter, isLinkedIn].filter(
       Boolean,
     ).length;
     chk();
@@ -236,18 +235,25 @@ const CustomModal = ({
                 )}
               </View>
               <View>
-                {!platform?.isInstagram ? (
+                {!platform?.isTwitter ? (
                   <TouchableOpacity
-                    onPress={() => onAction('INSTAGRAM')}
-                    disabled={isDisable}>
-                    <Image
-                      source={instagramIcon}
-                      style={{width: 45, height: 45}}
-                    />
+                    onPress={() => onAction('TWITTER')}
+                    disabled={isDisable}
+                    style={{
+                      width: 45,
+                      height: 45,
+                      backgroundColor: '#1DA1F2',
+                      borderRadius: 8,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
+                      X
+                    </Text>
                   </TouchableOpacity>
                 ) : (
                   <View>
-                    <Image source={LT} style={{width: 50, height: 50}} />
+                    <Image source={BT} style={{width: 50, height: 50}} />
                   </View>
                 )}
               </View>

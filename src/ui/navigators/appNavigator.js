@@ -152,10 +152,7 @@ const AppDrawer = ({ onLogout }) => {
           component={Home}
           options={({ navigation }) => ({
             ...drawerItemStyles,
-            headerStyle: { backgroundColor: '#E8F0F9' },
-            headerTintColor: 'black',
-            headerTitleAlign: 'center',
-            headerTitle: 'Chekdin',
+            headerShown: false, // Hide the default header since we have custom NavigationBar
             drawerLabel: ({ focused, color }) => (
               <View style={{ ...styles.drawerItemContainer, flexDirection:'row',backgroundColor: focused ? drawerItemStyles.drawerActiveBackgroundColor : drawerItemStyles.drawerInactiveBackgroundColor }}>
                   <Image source={HomeIcon} style={{ width: 25, height: 25 }} />  
@@ -164,14 +161,6 @@ const AppDrawer = ({ onLogout }) => {
                    </Text>
               </View>
             ),
-            headerRight: () => (
-              <UserProfileImage onPress={() => navigation.navigate('Profile')} />
-            ),
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                <Image source={Menu} style={{ marginLeft: 20, width: 50, height: 50 }} />
-              </TouchableOpacity>
-            )
           })}
         />
         <Drawer.Screen
@@ -180,7 +169,7 @@ const AppDrawer = ({ onLogout }) => {
           options={({ navigation }) => ({
             ...drawerItemStyles,
             headerTitleAlign: 'center',
-            headerStyle: { backgroundColor: '#E8F0F9' },
+            headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
             headerTintColor: 'black',
             headerTitle: 'Profile',
             drawerLabel: ({ focused, color }) => (
@@ -200,9 +189,14 @@ const AppDrawer = ({ onLogout }) => {
               </View>
             ),
             headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                <Image source={Menu} style={{ marginLeft: 10, width: 30, height: 30 }} />
-              </TouchableOpacity>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Image source={back} style={{ marginLeft: 20, width: 35, height: 35 }} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                  <Image source={Menu} style={{ marginLeft: 10, width: 30, height: 30 }} />
+                </TouchableOpacity>
+              </View>
             )
           })}
         />
@@ -227,6 +221,7 @@ const AppDrawer = ({ onLogout }) => {
               borderBottomWidth: 0,
               elevation: 0,
               shadowOpacity: 0,
+              paddingBottom: 10,
             },
             headerTintColor: 'black',
             headerTitleAlign: 'center',
@@ -253,7 +248,7 @@ const AppDrawer = ({ onLogout }) => {
           headerShown: true,
           headerTitleAlign: 'center',
           headerTitle: 'QR Scanner',
-          headerStyle: { backgroundColor: '#E8F0F9' },
+          headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
           headerTintColor: 'black',
           drawerLabel: ({ focused, color }) => (
             <TouchableOpacity style={{ ...styles.drawerItemContainer,flexDirection:'row', backgroundColor: focused ? drawerItemStyles.drawerActiveBackgroundColor : drawerItemStyles.drawerInactiveBackgroundColor }} onPress={() => {
@@ -281,7 +276,7 @@ const AppDrawer = ({ onLogout }) => {
           options={({ navigation }) => ({
             ...drawerItemStyles,
             headerTitle: "My Coupons",
-            headerStyle: { backgroundColor: '#E8F0F9' },
+            headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
             headerTintColor: 'black',
             headerTitleAlign: 'center',
             drawerLabel: ({ focused, color }) => (
@@ -401,32 +396,32 @@ const AppNavigator = ({ onLogout, profile }) => {
       <Stack.Screen name="MerchantDetails" component={DetailMerchantScreen} options={{ headerShown: false }} />
       <Stack.Screen name="EditProfile" component={EditProfile}
         options={{
-          headerStyle: { backgroundColor: '#E8F0F9' },
+          headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
           headerTintColor: 'black',
           headerTitleAlign: 'center',
           headerTitle: "Edit Profile",
         }} />
       <Stack.Screen name="CouponDetails" component={DetailCouponScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Filter" component={FilterScreen} options={{ headerStyle: { backgroundColor: '#E8F0F9' } }} />
+      <Stack.Screen name="Filter" component={FilterScreen} options={{ headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 } }} />
       <Stack.Screen name="Map" component={Map} options={{ headerShown: false }} />
 
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
         options={{
-          headerStyle: { backgroundColor: '#E8F0F9' },
+          headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
           headerTintColor: 'black',
           headerTitleAlign: 'center',
           headerTitle: "Privacy Policy",
         }} />
       <Stack.Screen name="TermsAndCondition" component={TermsAndCondition}
         options={{
-          headerStyle: { backgroundColor: '#E8F0F9' },
+          headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
           headerTintColor: 'black',
           headerTitleAlign: 'center',
           headerTitle: "Terms And Conditions",
         }} />
       <Stack.Screen name="AboutUs" component={AboutUs}
         options={{
-          headerStyle: { backgroundColor: '#E8F0F9' },
+          headerStyle: { backgroundColor: '#E8F0F9', paddingBottom: 10 },
           headerTintColor: 'black',
           headerTitleAlign: 'center',
           headerTitle: "About Us",

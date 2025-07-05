@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,10 +14,12 @@ import {
   RefreshControl,
   AppState,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getCouponStats} from '../../../slices/couponSlice';
-import {getMerchentList} from '../../../slices/merchentSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCouponStats } from '../../../slices/couponSlice';
+import { getMerchentList } from '../../../slices/merchentSlice';
+import { registerForProximityNotifications, updateProximityLocation } from '../../../slices/proximityNotificationSlice';
 import messaging from '@react-native-firebase/messaging';
 import LottieView from 'lottie-react-native';
 import {
@@ -33,12 +35,18 @@ import Svg, {
   Circle,
 } from 'react-native-svg';
 import UserIcon from '../../../assets/icons/user.png';
-import MerchantIcon from '../../../assets/icons/BecomeaMechant.png';
+import MerchantIcon from '../../../assets/icons/merchant-icon.png';
 import PermissionHandler from '../../../utils/permissionHandler';
 import Toast from 'react-native-toast-message';
+import { setupProximityNotificationListeners, registerForProximityNotifications as registerProximity } from '../../../utils/proximityNotificationHandler';
 import CouponsIcon from '../../../assets/icons/coupons.png';
 import SearchIcon from '../../../assets/icons/search.png';
-import {useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+import ActionBar from '../../components/ActionBar';
+import SearchResultsModal from './SearchResultsModal';
+import NavigationBar from '../../components/NavigationBar';
+import QRCodeComponent from '../../components/QRCodeComponent';
+import NearbyCouponsBanner from '../../components/NearbyCouponsBanner';
 
 const screenHeight = Dimensions.get('window').height;
 const smallScreenThreshold = 720;
@@ -51,7 +59,7 @@ const containerStyle2 = screenHeight <= mediumScreenThreshold;
 const containerStyle3 = screenHeight <= LargeScreenThreshold;
 const containerStyle4 = screenHeight >= ExtraLargeScreenThreshold;
 
-const HomePage = ({navigation}) => {
+const HomePage = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [fcmToken, setFcmToken] = useState(null);
   const [searchText, setSearchText] = useState('');
@@ -59,6 +67,7 @@ const HomePage = ({navigation}) => {
   const user = useSelector(state => state.auth.user);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const appState = useRef(AppState.currentState);
 
   const dispatch = useDispatch();
@@ -66,42 +75,93 @@ const HomePage = ({navigation}) => {
   useEffect(() => {
     requestUserPermission();
     createNotificationListeners();
+    setupProximityNotificationListeners(navigation);
   }, [dispatch, navigation]);
 
   const createNotificationListeners = () => {
+    console.log('🔔 Setting up notification listeners...');
+    
+    // Handle initial notification (app opened from notification)
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
+        console.log('🔔 Initial notification:', remoteMessage);
         if (remoteMessage) {
           let item = {
             id: remoteMessage.data.id,
           };
-          navigation.navigate('CouponDetails', {item, isNotification: true});
+          navigation.navigate('CouponDetails', { item, isNotification: true });
           setTimeout(() => {
             fetchData();
           }, 1000);
         }
+      })
+      .catch(error => {
+        console.error('❌ Error getting initial notification:', error);
       });
 
+    // Handle background messages
     messaging().setBackgroundMessageHandler(async remoteMessage => {
-      let item = {
-        id: remoteMessage.data.id,
-      };
-      navigation.navigate('CouponDetails', {item, isNotification: true});
+      console.log('🔔 Background message received:', remoteMessage);
+      
+      // Handle different types of notifications
+      if (remoteMessage.data.type === 'proximity_coupon') {
+        console.log('🔔 Proximity coupon notification received');
+        // Handle proximity notification
+        const { couponId, merchantId } = remoteMessage.data;
+        // You can add custom logic here for proximity notifications
+      } else {
+        // Handle regular coupon notifications
+        let item = {
+          id: remoteMessage.data.id,
+        };
+        navigation.navigate('CouponDetails', { item, isNotification: true });
+      }
+      
       setTimeout(() => {
         fetchData();
       }, 1000);
     });
 
+    // Handle foreground messages
     messaging().onMessage(async remoteMessage => {
-      let item = {
-        id: remoteMessage.data.id,
-      };
-      navigation.navigate('CouponDetails', {item, isNotification: true});
+      console.log('🔔 Foreground message received:', remoteMessage);
+      
+      // Handle different types of notifications
+      if (remoteMessage.data.type === 'proximity_coupon') {
+        console.log('🔔 Proximity coupon notification in foreground');
+        // Show custom in-app notification for proximity
+        Toast.show({
+          type: 'success',
+          text1: 'New Coupon Nearby! 🎉',
+          text2: `${remoteMessage.data.couponTitle || 'Special Offer'} at ${remoteMessage.data.merchantName || 'Nearby Merchant'}`,
+          onPress: () => {
+            navigation.navigate('CouponDetails', { 
+              item: { id: remoteMessage.data.couponId },
+              isNotification: true 
+            });
+          }
+        });
+      } else {
+        // Handle regular coupon notifications
+        let item = {
+          id: remoteMessage.data.id,
+        };
+        navigation.navigate('CouponDetails', { item, isNotification: true });
+      }
+      
       setTimeout(() => {
         fetchData();
       }, 1000);
     });
+
+    // Listen for token refresh
+    messaging().onTokenRefresh(token => {
+      console.log('🔔 FCM token refreshed:', token ? 'YES' : 'NO');
+      setFcmToken(token);
+    });
+
+    console.log('🔔 Notification listeners setup complete');
   };
 
   useEffect(() => {
@@ -110,15 +170,41 @@ const HomePage = ({navigation}) => {
 
   async function requestUserPermission() {
     try {
+      console.log('🔔 Requesting notification permissions...');
+      
+      // Request permission for iOS
+      const authStatus = await messaging().requestPermission();
+      console.log('🔔 Authorization status:', authStatus);
+      
+      // Register device for remote messages
       await messaging().registerDeviceForRemoteMessages();
+      console.log('🔔 Device registered for remote messages');
+      
+      // Get FCM token
       const token = await messaging().getToken();
+      console.log('🔔 FCM Token received:', token ? 'YES' : 'NO');
       setFcmToken(token);
+      
+      // Subscribe to general topic
+      await messaging().subscribeToTopic('all_users');
+      console.log('🔔 Subscribed to "all_users" topic');
+      
+      // Subscribe to proximity topic
+      await messaging().subscribeToTopic('proximity_coupons');
+      console.log('🔔 Subscribed to "proximity_coupons" topic');
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Notifications Enabled',
+        text2: 'You will now receive notifications for nearby coupons.',
+      });
+      
     } catch (error) {
-      console.error('Error requesting user permission:', error);
+      console.error('❌ Error requesting user permission:', error);
       Toast.show({
         type: 'error',
         text1: 'Notification Error',
-        text2: 'Unable to set up notifications.',
+        text2: 'Unable to set up notifications. Please check your settings.',
       });
     }
   }
@@ -169,6 +255,24 @@ const HomePage = ({navigation}) => {
       if (hasPermission) {
         const position = await PermissionHandler.getCurrentLocation();
         setLocation(position);
+        
+        // Register for proximity notifications when location is available
+        if (user?.token) {
+          try {
+            await dispatch(registerForProximityNotifications({
+              token: user.token,
+              userLocation: position,
+              radius: 20
+            }));
+            
+            // Also register with Firebase for proximity notifications
+            await registerProximity(user.token, position);
+            
+            console.log('Successfully registered for proximity notifications');
+          } catch (error) {
+            console.error('Error registering for proximity notifications:', error);
+          }
+        }
       } else {
         Toast.show({
           type: 'error',
@@ -210,7 +314,7 @@ const HomePage = ({navigation}) => {
 
   const handleSearch = () => {
     if (searchText.trim()) {
-      navigation.navigate('AroundMe', {searchData: searchText.trim()});
+      setShowSearchModal(true);
     }
   };
 
@@ -222,10 +326,15 @@ const HomePage = ({navigation}) => {
   const handleTextChange = text => {
     setSearchText(text);
     setShowCross(text.length > 0);
+    
+    // Open search modal as soon as user starts typing
+    if (text.length === 1) {
+      setShowSearchModal(true);
+    }
   };
 
   const handleBottomSearch = () => {
-    navigation.navigate('AroundMe');
+    navigation.navigate('AroundMe', {filter: false, filter50: true});
   };
 
   const handleCouponSearch = () => {
@@ -233,8 +342,10 @@ const HomePage = ({navigation}) => {
   };
 
   const handleBecomeMerchant = () => {
-    navigation.navigate('BecomeMerchant');
+    Linking.openURL(`https://chekdin.com/become-a-merchant/`)
   };
+
+
 
   const stats = useSelector(state => state.coupon.couponStats);
   const data = stats?.data;
@@ -262,7 +373,17 @@ const HomePage = ({navigation}) => {
   }, [fetchData]);
 
   return (
-    <SafeAreaView style={{flex: 1,  backgroundColor: '#E8F0F9',}}>
+    <View style={{ flex: 1, backgroundColor: '#E8F0F9', }}>
+      {/* Custom Navigation Bar */}
+      <NavigationBar
+        navigation={navigation}
+        title="Chekdin"
+        showMenu={true}
+        showProfile={true}
+        backgroundColor="#E8F0F9"
+        textColor="black"
+      />
+      
       {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color="#02676C" />
@@ -272,16 +393,25 @@ const HomePage = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        contentContainerStyle={{flexGrow: 1}}
+        contentContainerStyle={{ flexGrow: 1 }}
       >
         <View style={styles.mainContainer}>
+
+
+          {/* Nearby Coupons Banner */}
+          <NearbyCouponsBanner 
+            onPress={() => {
+              // The component will handle the navigation internally
+            }}
+          />
+
           {/* Search Bar */}
           <View style={styles.searchContainer}>
             <View style={styles.searchInputContainer}>
               <Image source={SearchIcon} style={styles.searchIcon} />
               <TextInput
                 style={styles.searchInput}
-                placeholder="Search merchants or coupons..."
+                placeholder="Search merchants"
                 placeholderTextColor="#707070"
                 value={searchText}
                 onChangeText={handleTextChange}
@@ -295,11 +425,6 @@ const HomePage = ({navigation}) => {
                 </TouchableOpacity>
               )}
             </View>
-            <TouchableOpacity
-              style={styles.filterButton}
-              onPress={() => navigation.navigate('Filter')}>
-              <Text style={styles.filterButtonText}>Filter</Text>
-            </TouchableOpacity>
           </View>
 
           {/* Charts Section */}
@@ -347,223 +472,31 @@ const HomePage = ({navigation}) => {
 
           {/* QR Code Section - Centered in remaining space */}
           <View style={styles.qrSection}>
-            <View style={styles.qrContainer}>
-              <View style={styles.qrCircleContainer}>
-                {/* Circular text around the QR circle */}
-                <Svg
-                  width={300}
-                  height={300}
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: [{translateX: -150}, {translateY: -150}],
-                    zIndex: 2,
-                    pointerEvents: 'none',
-                  }}>
-                  <Defs>
-                    <Path
-                      id="qrCircleTextPath"
-                      d="M150,150 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"
-                    />
-                  </Defs>
-                  <SvgText
-                    fill="#02676C"
-                    fontSize={12}
-                    fontFamily="Poppins-Regular"
-                    textAnchor="middle">
-                    <TextPath
-                      href="#qrCircleTextPath"
-                      startOffset="0%"
-                      textAnchor="middle">
-                      TAP ON QR CODE TO CHECK IN • TAP ON QR CODE TO CHECK IN •
-                    </TextPath>
-                  </SvgText>
-                </Svg>
-
-                <TouchableOpacity onPress={checkPermission} style={styles.qrCircle}>
-                  {Platform.OS === 'android' ? (
-                    <Image
-                      style={{width: 140, height: 140}}
-                      source={require('../../../assets/images/homeqr1.gif')}
-                    />
-                  ) : (
-                    <LottieView
-                      source={require('../../../assets/lottie-files/qrhome.json')}
-                      style={{width: 150, height: 150}}
-                      autoPlay
-                      loop
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
+            <QRCodeComponent onPress={checkPermission} />
           </View>
         </View>
       </ScrollView>
-      {/* Arched SVG background behind the action bar, now precisely matches icon positions */}
-      <View style={styles.archedBgContainer} pointerEvents="none">
-        <Svg
-          width="100%"
-          height={220}
-          viewBox="0 0 400 220"
-          style={{position: 'absolute', bottom: 0}}>
-          <Path
-            d="M0,160 Q80,80 200,120 Q320,160 400,100 L400,220 L0,220 Z"
-            fill="#60C0B1"
-            opacity={0.18}
-          />
-        </Svg>
-      </View>
-      {/* Arc SVG at the bottom */}
-      <View style={styles.arcContainer} pointerEvents="none">
-        <Svg
-          width="100%"
-          height={80}
-          viewBox="0 0 400 80"
-          style={{position: 'absolute', bottom: 0}}>
-          <Path
-            d="M0,80 Q200,0 400,80 L400,80 L0,80 Z"
-            fill="#E8F0F9" // Use your brand color here
-          />
-        </Svg>
-      </View>
-      {/* Bottom action bar with search (left), profile and merchant (right) */}
-      <View style={styles.bottomActionBar}>
-        {/* Coupon Button with circular text (left) */}
-        <View style={{alignItems: 'center', marginTop: 100}}>
-          <TouchableOpacity
-            onPress={handleCouponSearch}
-            activeOpacity={0.7}
-            style={{alignItems: 'center', justifyContent: 'center', width: 100, height: 100}}
-          >
-            <Svg width={100} height={100}>
-              <Defs>
-                <Path
-                  id="couponCircle"
-                  d="M50,50 m-33,0 a33,33 0 1,1 66,0 a33,33 0 1,1 -66,0"
-                />
-              </Defs>
-              <SvgText
-                fill="#222"
-                fontSize="10"
-                fontFamily="Poppins-Regular"
-                textAnchor="middle">
-                <TextPath
-                  href="#couponCircle"
-                  startOffset="25%"
-                  textAnchor="middle">
-                  COUPONS
-                </TextPath>
-              </SvgText>
-              <Circle cx={50} cy={50} r={28} fill="#60C0B1" />
-            </Svg>
-            <Image
-              source={CouponsIcon}
-              style={[
-                styles.fabIcon,
-                {position: 'absolute', left: 36, top: 36},
-              ]}
-            />
-          </TouchableOpacity>
-        </View>
-        {/* Merchant Button with circular text (center, regular size, teal) */}
-        <View style={{alignItems: 'center', marginTop: 80}}>
-          <TouchableOpacity
-            onPress={handleBecomeMerchant}
-            activeOpacity={0.7}
-            style={{alignItems: 'center', justifyContent: 'center', width: 100, height: 100}}
-          >
-            <Svg width={100} height={100}>
-              <Defs>
-                <Path
-                  id="merchantCircle"
-                  d="M50,50 m-33,0 a33,33 0 1,1 66,0 a33,33 0 1,1 -66,0"
-                />
-              </Defs>
-              <SvgText
-                fill="#222"
-                fontSize="10"
-                fontFamily="Poppins-Regular"
-                textAnchor="middle">
-                <TextPath
-                  href="#merchantCircle"
-                  startOffset="25%"
-                  textAnchor="middle">
-                  BECOME A MERCHANT
-                </TextPath>
-              </SvgText>
-              <Circle cx={50} cy={50} r={28} fill="#60C0B1" />
-            </Svg>
-            <Image
-              source={MerchantIcon}
-              style={[
-                styles.fabIcon,
-                {position: 'absolute', left: 36, top: 36},
-              ]}
-            />
-          </TouchableOpacity>
-        </View>
-        {/* Search Button with circular text (right, largest, dark green, white icon) */}
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: 60,
-            width: 144,
-            height: 144,
-            justifyContent: 'center',
-          }}>
-          {/* Pulse Effect */}
-          <PulseCircle />
-          <Svg
-            width={144}
-            height={144}
-            style={{position: 'absolute', left: 0, top: 0}}>
-            <Defs>
-              <Path
-                id="searchCircle"
-                d="M72,72 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0"
-              />
-            </Defs>
-            <SvgText
-              fill="#222"
-              fontSize="10"
-              fontFamily="Poppins-Regular"
-              textAnchor="middle">
-              <TextPath
-                href="#searchCircle"
-                startOffset="25%"
-                textAnchor="middle">
-                SEARCH
-              </TextPath>
-            </SvgText>
-            <Circle cx={72} cy={72} r={43} fill="#02676C" />
-          </Svg>
-          <Image
-            source={SearchIcon}
-            style={[
-              styles.fabIcon,
-              styles.searchIconBig,
-              {
-                position: 'absolute',
-                left: 50,
-                top: 50,
-                tintColor: '#fff',
-                width: 44,
-                height: 44,
-              },
-            ]}
-          />
-          {/* Touchable for navigation */}
-          <TouchableOpacity
-            style={styles.searchButtonTouchable}
-            onPress={handleBottomSearch}
-            activeOpacity={0.7}
-            pressRetentionOffset={{top: 20, left: 20, right: 20, bottom: 20}}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+      <ActionBar
+        onBecomeMerchant={handleBecomeMerchant}
+        onSearch={handleBottomSearch}
+        onCoupons={handleCouponSearch}
+        showPulseEffect={true}
+      />
+      
+
+      
+      {/* Search Results Modal */}
+      <SearchResultsModal
+        visible={showSearchModal}
+        onClose={() => {
+          setShowSearchModal(false);
+          setSearchText('');
+          setShowCross(false);
+        }}
+        initialSearchText={searchText}
+        navigation={navigation}
+      />
+    </View>
   );
 };
 
@@ -571,9 +504,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#E8F0F9',
-    paddingHorizontal: 20,
+    paddingHorizontal: 20, // Reduced to give more space for content
     justifyContent: 'space-between',
-    paddingTop: 20,
+    paddingTop: 10, // Reduced since we now have NavigationBar
     paddingBottom: 160,
   },
   searchContainer: {
@@ -581,55 +514,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     flex: 0,
+    paddingHorizontal: 0, // Ensure no extra horizontal padding
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     flex: 0,
     marginVertical: 20,
+    paddingHorizontal: 0, // Ensure no extra horizontal padding
   },
   outcircle: {
     alignItems: 'center',
   },
-  fabIcon: {
-    width: 28,
-    height: 28,
-    tintColor: '#fff',
-  },
-  searchIconBig: {
-    width: 44,
-    height: 44,
-  },
-  searchButtonTouchable: {
-    position: 'absolute',
-    left: 50,
-    top: 50,
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-  },
-  qrContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  qrCircleContainer: {
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 300,
-    height: 300,
-    alignSelf: 'center',
-  },
-  qrCircle: {
-    height: containerStyle ? responsiveHeight(22) : responsiveHeight(29),
-    width: containerStyle ? responsiveWidth(40) : responsiveWidth(62),
-    borderRadius: containerStyle ? 100 : 300,
-    backgroundColor: 'rgba(96, 192, 177, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginTop: containerStyle ? 5 : 10,
-  },
+
+
+
   checkInButton: {
     backgroundColor: 'transparent',
     paddingVertical: 16,
@@ -654,80 +553,7 @@ const styles = StyleSheet.create({
     height: 80,
     zIndex: 1,
   },
-  archedBgContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 220,
-    zIndex: 2,
-  },
-  bottomActionBar: {
-    position: 'absolute',
-    left: 32,
-    right: 32,
-    bottom: 40,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    zIndex: 3,
-  },
-  fabCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#fff', // fallback, will be overridden
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-    marginHorizontal: 4,
-  },
-  searchBg: {
-    backgroundColor: '#60C0B1', // Example brand color for search
-  },
-  profileBg: {
-    backgroundColor: '#60C0B1', // Example brand color for profile
-    marginRight: 12,
-  },
-  merchantBg: {
-    backgroundColor: '#02676C', // Example brand color for merchant
-  },
-  searchBig: {
-    width: 84,
-    height: 84,
-    borderRadius: 42,
-  },
-  fabLabel: {
-    fontSize: 12,
-    color: '#222',
-    textAlign: 'center',
-    fontFamily: 'Poppins-Regular',
-  },
-  labelTop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: 100,
-    textAlign: 'center',
-  },
-  labelRight: {
-    position: 'absolute',
-    top: 50,
-    right: -60,
-    width: 60,
-    textAlign: 'left',
-  },
-  labelBottom: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: 120,
-    textAlign: 'center',
-  },
+
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -783,7 +609,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20, // Match the mainContainer padding for alignment with charts and search
   },
+
   loadingOverlay: {
     position: 'absolute',
     top: 0,
@@ -797,111 +625,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const PulseCircle = () => {
-  const scale1 = useRef(new Animated.Value(1)).current;
-  const opacity1 = useRef(new Animated.Value(0.6)).current;
-  const scale2 = useRef(new Animated.Value(1)).current;
-  const opacity2 = useRef(new Animated.Value(0.3)).current;
 
-  useEffect(() => {
-    const pulse1 = () => {
-      Animated.loop(
-        Animated.parallel([
-          Animated.sequence([
-            Animated.timing(scale1, {
-              toValue: 1.8,
-              duration: 1500,
-              useNativeDriver: true,
-            }),
-            Animated.timing(scale1, {
-              toValue: 1,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(opacity1, {
-              toValue: 0,
-              duration: 1500,
-              useNativeDriver: true,
-            }),
-            Animated.timing(opacity1, {
-              toValue: 0.6,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-        ]),
-      ).start();
-    };
-
-    const pulse2 = () => {
-      Animated.loop(
-        Animated.parallel([
-          Animated.sequence([
-            Animated.timing(scale2, {
-              toValue: 2.2,
-              duration: 2000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(scale2, {
-              toValue: 1,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.sequence([
-            Animated.timing(opacity2, {
-              toValue: 0,
-              duration: 2000,
-              useNativeDriver: true,
-            }),
-            Animated.timing(opacity2, {
-              toValue: 0.3,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-        ]),
-      ).start();
-    };
-
-    pulse1();
-    pulse2();
-  }, [scale1, opacity1, scale2, opacity2]);
-
-  return (
-    <>
-      <Animated.View
-        style={{
-          position: 'absolute',
-          left: 22,
-          top: 22,
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          backgroundColor: '#02676C',
-          opacity: opacity1,
-          transform: [{scale: scale1}],
-          zIndex: 0,
-        }}
-      />
-      <Animated.View
-        style={{
-          position: 'absolute',
-          left: 22,
-          top: 22,
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          backgroundColor: '#60C0B1',
-          opacity: opacity2,
-          transform: [{scale: scale2}],
-          zIndex: 0,
-        }}
-      />
-    </>
-  );
-};
 
 export default HomePage;

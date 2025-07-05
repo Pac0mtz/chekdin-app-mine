@@ -32,17 +32,24 @@ export const pushNotification = async (token, data) => {
 }
 
 export const socialLoginService = data => {
-  console.log("data on social", data)
-  return api
-    .post('/auth/social-login', data)
-    .then(response => response.data)
+  console.log("Social login data:", data);
+  return axios
+    .post(`${BASEURL}/auth/social-login`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      console.log("Social login response:", response.data);
+      return response.data;
+    })
     .catch(error => {
+      console.log("Social login error:", error.response?.data || error.message);
       if (error?.response && error?.response?.data && error?.response?.data?.message) {
-        console.log("err", error?.response?.data?.message, error)
-        const err = error?.response?.data?.message
+        const err = error?.response?.data?.message;
         throw new Error(err);
       } else {
-        throw new Error("Err.");
+        throw new Error("Social login failed. Please try again.");
       }
     });
 };
@@ -110,23 +117,52 @@ export const fetchProfile = token => {
 };
 
 export const verifyEmail = async (data) => {
-  console.log("data", data)
+  console.log("Verifying email with data:", data);
   try {
-    const response = await axios.post(`${BASEURL}/auth/verify-email`, data);
+    // Use regular axios instead of api interceptor to avoid authorization issues
+    const response = await axios.post(`${BASEURL}/auth/verify-email`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log("Verification response:", response.data);
     return response.data;
   } catch (error) {
-    console.log("error", error)
+    console.log("Verification error:", error.response?.data || error.message);
     if (error?.response && error?.response?.data && error?.response?.data?.message) {
-      const err = error?.response?.data?.message
+      const err = error?.response?.data?.message;
       throw new Error(err);
     } else {
-      throw new Error("Err.");
+      throw new Error("Verification failed. Please try again.");
+    }
+  }
+};
+
+export const resendOTP = async (email) => {
+  console.log("Resending OTP to email:", email);
+  try {
+    const response = await axios.post(`${BASEURL}/auth/resend-otp`, { email }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log("Resend OTP response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Resend OTP error:", error.response?.data || error.message);
+    if (error?.response && error?.response?.data && error?.response?.data?.message) {
+      const err = error?.response?.data?.message;
+      throw new Error(err);
+    } else {
+      throw new Error("Failed to resend OTP. Please try again.");
     }
   }
 };
 
 export const updateProfile = async (token, data) => {
-  console.log("token", token, "data", data)
+  console.log("updateProfile called with token:", token ? "present" : "missing");
+  console.log("updateProfile data:", data);
+  
   try {
     const response = await api.patch('/auth/profile', data, {
       headers: {
@@ -134,8 +170,10 @@ export const updateProfile = async (token, data) => {
         "content-type": "multipart/form-data",
       },
     });
+    console.log("updateProfile response:", response.data);
     return response.data;
   } catch (error) {
+    console.error("updateProfile error:", error.response?.data || error.message);
     if (error?.response && error?.response?.data && error?.response?.data?.message) {
       const err = error?.response?.data?.message
       throw new Error(err);

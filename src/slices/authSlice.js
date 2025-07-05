@@ -8,6 +8,7 @@ import {
   changePasswordService,
   socialLoginService,
   verifyEmail,
+  resendOTP,
   pushNotification,
   deleteAccountAPI,
 } from '../services/authService';
@@ -23,7 +24,11 @@ const initialState = {
   profileUpdateStatus: 'idle',
   signupStatus: 'idle',
   verifyStatus: 'idle',
+  resendOTPStatus: 'idle',
   isFromSignup: 'idle',
+  justLoggedIn: false,
+  justVerifiedSignup: false, // Track when user just completed email verification
+  pendingSignupData: null, // Store signup data until email verification
 };
 
 // Create an action creator for setting the FCM result
@@ -51,13 +56,21 @@ export const pushNoti = createAsyncThunk(
 
 export const socialLogin = createAsyncThunk(
   '/auth/social-login',
-  async (data, {getState}) => {
-    console.warn('data socialLogin', data);
-    const {user} = getState().auth;
-    const accessToken = user?.data?.access_token;
-    console.warn('accessToken', accessToken);
-    const response = await socialLoginService(data);
-    return response;
+  async (data, {getState, dispatch, rejectWithValue}) => {
+    try {
+      console.log('Social login thunk called with:', data);
+      const response = await socialLoginService(data);
+      console.log('Social login successful:', response);
+      
+      // Save session after successful social login
+      await SessionManager.saveSession(response);
+      dispatch(saveUser(response));
+      
+      return response;
+    } catch (error) {
+      console.error('Social login failed:', error);
+      return rejectWithValue(error.message);
+    }
   },
 );
 
@@ -81,14 +94,49 @@ export const changePassword = createAsyncThunk(
 export const signUp = createAsyncThunk('/auth/customer-signup', async data => {
   const response = await SignUpService(data);
   console.warn('response', response, data);
+  // Send to Zapier webhook
+  try {
+    await fetch('https://hooks.zapier.com/hooks/catch/5642269/ubba5lk/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: data.name,
+        phone: data.phone,
+      }),
+    });
+  } catch (err) {
+    console.warn('Zapier webhook failed', err);
+  }
   return response?.data;
 });
 
 export const emailVerify = createAsyncThunk(
   '/auth/verify-email',
   async (data, {rejectWithValue}) => {
-    const response = await verifyEmail(data);
-    return response;
+    try {
+      console.log('Email verification thunk called with:', data);
+      const response = await verifyEmail(data);
+      console.log('Email verification successful:', response);
+      return response;
+    } catch (error) {
+      console.error('Email verification failed:', error);
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const resendOTPThunk = createAsyncThunk(
+  '/auth/resend-otp',
+  async (email, {rejectWithValue}) => {
+    try {
+      console.log('Resend OTP thunk called with:', email);
+      const response = await resendOTP(email);
+      console.log('Resend OTP successful:', response);
+      return response;
+    } catch (error) {
+      console.error('Resend OTP failed:', error);
+      return rejectWithValue(error.message);
+    }
   },
 );
 
@@ -121,11 +169,28 @@ export const clearChangePasswordStatus = createAsyncThunk(
 
 export const profileUpdate = createAsyncThunk(
   '/profile',
-  async (data, {getState}) => {
-    const {user} = getState().auth;
-    const accessToken = user?.data?.access_token;
-    const response = await updateProfile(accessToken, data);
-    return response;
+  async (data, {getState, rejectWithValue}) => {
+    try {
+      const {user} = getState().auth;
+      const accessToken = user?.data?.access_token;
+      
+      if (!accessToken) {
+        throw new Error('No access token available. Please login again.');
+      }
+      
+      console.log('Profile update thunk - access token:', accessToken ? 'Present' : 'Missing');
+      console.log('Profile update thunk - data:', data);
+      
+      const response = await updateProfile(accessToken, data);
+      console.log('Profile update thunk - response:', response);
+      return response;
+    } catch (error) {
+      console.error('Profile update thunk error:', error);
+      return rejectWithValue({
+        message: error.message || 'Profile update failed',
+        error: error
+      });
+    }
   },
 );
 
@@ -157,6 +222,28 @@ export const authSlice = createSlice({
       state.fcmResult = action.payload;
       state.status = 'idle';
     },
+    resetJustLoggedIn: state => {
+      state.justLoggedIn = false;
+    },
+    resetJustVerifiedSignup: state => {
+      state.justVerifiedSignup = false;
+    },
+    resetAuthState: state => {
+      state.user = null;
+      state.status = 'idle';
+      state.forgotStatus = 'idle';
+      state.loginStatus = 'idle';
+      state.changePasswordStatus = 'idle';
+      state.error = null;
+      state.profileUpdateStatus = 'idle';
+      state.signupStatus = 'idle';
+      state.verifyStatus = 'idle';
+      state.resendOTPStatus = 'idle';
+      state.isFromSignup = 'idle';
+      state.justLoggedIn = false;
+      state.justVerifiedSignup = false;
+      state.pendingSignupData = null;
+    },
   },
   extraReducers: builder => {
     builder
@@ -167,6 +254,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loginStatus = 'succeeded';
         state.user = state.loginStatus === 'succeeded' && action.payload;
+        state.justLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loginStatus = 'failed';
@@ -201,6 +289,7 @@ export const authSlice = createSlice({
       .addCase(socialLogin.fulfilled, (state, action) => {
         state.loginStatus = 'succeeded';
         state.user = action.payload;
+        state.justLoggedIn = true;
       })
       .addCase(socialLogin.rejected, (state, action) => {
         state.loginStatus = 'failed';
@@ -239,9 +328,14 @@ export const authSlice = createSlice({
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(signUp.fulfilled, state => {
+      .addCase(signUp.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.signupStatus = 'succeeded';
+        // Store signup data temporarily until email verification
+        state.pendingSignupData = action.payload;
+        // Don't set user yet - wait for email verification
+        // state.user = action.payload;
+        // state.justLoggedIn = true;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.status = 'failed';
@@ -256,10 +350,32 @@ export const authSlice = createSlice({
         state.verifyStatus = 'succeeded';
         state.isFromSignup = 'true';
         state.user = action.payload;
+        state.justLoggedIn = true; // Set justLoggedIn only after email verification
+        state.justVerifiedSignup = true;
+        state.error = null;
+        // Clear pending signup data after successful verification
+        state.pendingSignupData = null;
+        // Save session only after successful verification
+        if (action.payload) {
+          // Save session to AsyncStorage
+          require('../utils/sessionManager').default.saveSession(action.payload);
+        }
       })
       .addCase(emailVerify.rejected, (state, action) => {
         state.verifyStatus = 'failed';
-        state.error = action?.error?.message ?? 'Something went wrong.';
+        state.error = action?.payload ?? action?.error?.message ?? 'Verification failed. Please try again.';
+      })
+      .addCase(resendOTPThunk.pending, state => {
+        state.resendOTPStatus = 'loading';
+        state.error = null;
+      })
+      .addCase(resendOTPThunk.fulfilled, (state, action) => {
+        state.resendOTPStatus = 'succeeded';
+        state.error = null;
+      })
+      .addCase(resendOTPThunk.rejected, (state, action) => {
+        state.resendOTPStatus = 'failed';
+        state.error = action?.payload ?? action?.error?.message ?? 'Failed to resend OTP. Please try again.';
       })
       .addCase(getProfile.pending, state => {
         state.status = 'loading';
@@ -283,9 +399,22 @@ export const authSlice = createSlice({
       })
       .addCase(profileUpdate.rejected, (state, action) => {
         state.profileUpdateStatus = 'failed';
-        state.error = action?.error?.message ?? 'Something went wrong.';
+        state.error = action?.payload?.message ?? action?.error?.message ?? 'Profile update failed. Please try again.';
+        console.error('Profile update rejected:', action.payload || action.error);
+      })
+      .addCase(resetAuthState.fulfilled, (state) => {
+        // State is already reset in the reducer
       });
   },
 });
+
+export const { resetJustLoggedIn, resetJustVerifiedSignup } = authSlice.actions;
+
+export const resetAuthState = createAsyncThunk(
+  '/auth/reset-state',
+  async (_, {dispatch}) => {
+    dispatch(authSlice.actions.resetAuthState());
+  },
+);
 
 export default authSlice.reducer;

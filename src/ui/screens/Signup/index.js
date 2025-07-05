@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {signUp} from '../../../slices/authSlice';
+import {signUp, resetAuthState} from '../../../slices/authSlice';
 import Pattern from '../../elements/pattern';
 import Logo from '../../elements/logo';
 import {useDispatch, useSelector} from 'react-redux';
@@ -17,10 +17,11 @@ import TextInputField from '../../modules/TextInput';
 import Button from '../../modules/Button';
 import Toast from 'react-native-toast-message';
 import CheckBox from '@react-native-community/checkbox';
-let ismounted = false;
+
 const Signup = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -28,20 +29,36 @@ const Signup = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.status === 'loading');
   const isSignupDisabled =
-    !name || !email || !password || password !== confirmPassword;
+    !name || !email || !phone || !password || password !== confirmPassword || !!phoneError;
   const status = useSelector(state => state.auth.status);
   const signupStatus = useSelector(state => state.auth.signupStatus);
   const Err = useSelector(state => state.auth.error);
 
   const handleSubmit = async () => {
-    if (name && email && password && password === confirmPassword) {
-      await dispatch(signUp({name, email, password}));
+    if (name && email && phone && password && password === confirmPassword && !phoneError) {
+      console.log('Starting signup process for:', email);
+      console.log('Signup data:', {name, email, phone, password});
+      try {
+        const result = await dispatch(signUp({name, email, phone_number: phone, password}));
+        console.log('Signup dispatch result:', result);
+      } catch (error) {
+        console.error('Signup error:', error);
+      }
+    } else {
+      console.log('Signup validation failed:', {
+        hasName: !!name,
+        hasEmail: !!email,
+        hasPhone: !!phone,
+        hasPassword: !!password,
+        passwordsMatch: password === confirmPassword,
+        phoneError: !!phoneError
+      });
     }
-    ismounted = true;
   };
 
   const validateEmail = input => {
@@ -85,23 +102,33 @@ const Signup = ({navigation}) => {
     }
   };
 
+  const handlePhoneChange = text => {
+    setPhone(text);
+    // Simple phone validation (10+ digits)
+    if (!/^\d{10,}$/.test(text)) {
+      setPhoneError('Enter a valid phone number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
   useEffect(() => {
-    console.log('isMo', ismounted);
-    if (signupStatus === 'succeeded' && ismounted) {
+    console.log('Signup status changed:', signupStatus, 'Error:', Err);
+    if (signupStatus === 'succeeded') {
       navigation.navigate('Verification', {email});
       Toast.show({
         type: 'success',
         text1: 'Verification email sent!',
+        text2: 'Please check your email for the verification code.',
       });
-      ismounted = false;
-    } else if (signupStatus === 'failed' && ismounted && Err) {
+    } else if (signupStatus === 'failed' && Err) {
       Toast.show({
         type: 'error',
-        text1: Err,
+        text1: 'Signup Failed',
+        text2: Err,
       });
-      ismounted = false;
     }
-  }, [signupStatus, Err, ismounted]);
+  }, [signupStatus, Err, navigation, email]);
 
   const handleConfirmPasswordChange = text => {
     setConfirmPassword(text);
@@ -140,6 +167,13 @@ const Signup = ({navigation}) => {
             type="email"
             error={emailError}
             value={email}
+          />
+          <TextInputField
+            placeholder="Phone Number"
+            onChangeText={handlePhoneChange}
+            type="phone"
+            value={phone}
+            error={phoneError}
           />
           <TextInputField
             placeholder="Password"
@@ -239,6 +273,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
+  },
+  button: {
+    padding: 15,
+    borderRadius: 5,
+    backgroundColor: '#02676C',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

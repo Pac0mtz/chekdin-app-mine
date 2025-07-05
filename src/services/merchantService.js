@@ -18,11 +18,13 @@ export const fetchMerchantList = (token, search = '') => {
 };
 
 export const filterMerchantList = (queryParameters, token) => {
-  console.log('testing', queryParameters);
-  const queryParams = new URLSearchParams(queryParameters);
-  console.log('queryParams', queryParams);
+  // Validate required parameters
+  if (!queryParameters.latitude || !queryParameters.longitude || !queryParameters.radius_in_km) {
+    throw new Error('Missing required filter parameters');
+  }
+  
   const url = `/merchant/get-list?latitude=${queryParameters.latitude}&longitude=${queryParameters.longitude}&radius_in_km=${queryParameters.radius_in_km}`;
-  console.log('url is here', url);
+  
   return api
     .get(url, {
       headers: {
@@ -30,12 +32,10 @@ export const filterMerchantList = (queryParameters, token) => {
       },
     })
     .then(response => {
-      console.log('this is response', response?.data?.data?.length);
       return response.data;
     })
     .catch(error => {
-      console.log(error?.message);
-      throw new Error(error.message);
+      throw new Error(error?.response?.data?.message || error?.message || 'Filter request failed');
     });
 };
 

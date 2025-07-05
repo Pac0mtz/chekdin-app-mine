@@ -49,7 +49,7 @@ const ShareDetails = ({route, navigation}) => {
     isFacebook: false,
     isWhatsapp: false,
     isSMS: false,
-    isInstagram: false,
+    isTwitter: false,
     isLinkedIn: false,
   });
 
@@ -114,6 +114,18 @@ const ShareDetails = ({route, navigation}) => {
     const checkCoupon = await dispatch(checkIsCoupon(id));
     const data = checkCoupon?.payload?.data;
     if (data?.is_chekdin === false) {
+      // Check if user has actually posted on social media
+      const hasPosted = Object.values(platform).some(value => value === true);
+      
+      if (!hasPosted) {
+        Toast.show({
+          type: 'error',
+          text1: 'Social Media Post Required',
+          text2: 'Please share on at least one social media platform before claiming',
+        });
+        return;
+      }
+
       const checkinFormData = new FormData();
       checkinFormData.append('coupon', id);
       dispatch(checkinCount(checkinFormData));
@@ -128,20 +140,38 @@ const ShareDetails = ({route, navigation}) => {
         isFacebook: false,
         isWhatsapp: false,
         isSMS: false,
-        isInstagram: false,
+        isTwitter: false,
         isLinkedIn: false,
       });
       Toast.show({
         type: 'success',
         text1: 'The Coupon is Chekdin',
       });
-      navigation?.navigate('Home');
+      setShareModalVisible(false);
+      setModalVisible(false);
+      setTimeout(() => {
+        navigation.reset({
+          index: 0,
+          routes: [
+            { name: 'Dashboard', params: { screen: 'MyCoupons', params: { user_coupons: true } } }
+          ],
+        });
+      }, 300);
     } else {
       Toast.show({
         type: 'error',
         text1: 'You have already checked in this coupon',
       });
-      navigation?.navigate('Home');
+      setShareModalVisible(false);
+      setModalVisible(false);
+      setTimeout(() => {
+        navigation.reset({
+          index: 0,
+          routes: [
+            { name: 'Dashboard', params: { screen: 'MyCoupons', params: { user_coupons: true } } }
+          ],
+        });
+      }, 300);
     }
   };
   const shareToLinkedIn = async () => {
@@ -164,7 +194,7 @@ const ShareDetails = ({route, navigation}) => {
             url: `data:image/png;base64, ${base64Image}`,
             social: Share.Social.LINKEDIN,
           };
-          const clipboardText = `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`;
+          const clipboardText = `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from ${couponList.data.merchant} \n \n${link}`;
           Clipboard.setString(clipboardText);
 
           Share.shareSingle(shareOptions)
@@ -172,6 +202,11 @@ const ShareDetails = ({route, navigation}) => {
               console.warn('res sharing to LinkedIn:', res);
               if (res.success === true) {
                 setPlatform({...platform, isLinkedIn: true});
+                Toast.show({
+                  type: 'success',
+                  text1: 'Posted to LinkedIn!',
+                  text2: 'You can now claim your coupon',
+                });
               }
               setIsDisabled(false);
             })
@@ -311,9 +346,15 @@ const ShareDetails = ({route, navigation}) => {
                   console.log('Share cancelled');
                   setIsDisabled(false);
                 } else {
+                  // Only mark as posted if the share was successful
                   setPlatform({...platform, isFacebook: true});
                   setIsDisabled(false);
                   console.log('Share success');
+                  Toast.show({
+                    type: 'success',
+                    text1: 'Posted to Facebook!',
+                    text2: 'You can now claim your coupon',
+                  });
                 }
               })
               .catch(error => {
@@ -322,11 +363,9 @@ const ShareDetails = ({route, navigation}) => {
           } else {
             const options = {
               social: Share.Social.FACEBOOK,
-              url: `data:image/png;base64, ${base64Image}`, // Use the base64 image data here
+              url: `data:image/png;base64, ${base64Image}`,
             };
-            const clipboardText = `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`;
             Clipboard.setString(clipboardText);
-
             Share.shareSingle(options)
               .then(res => {
                 console.log('res', res);
@@ -361,8 +400,9 @@ const ShareDetails = ({route, navigation}) => {
           const shareOptions = {
             title: "'Share via'",
             message: `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`,
-            url: '',
+            url: `data:image/png;base64,${base64Image}`,
             social: Share.Social.WHATSAPP,
+            type: 'image/png',
           };
 
           const clipboardText = `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`;
@@ -370,7 +410,14 @@ const ShareDetails = ({route, navigation}) => {
 
           Share.shareSingle(shareOptions)
             .then(res => {
-              setPlatform({...platform, isWhatsapp: true});
+              if (res.success === true || res.app) {
+                setPlatform({...platform, isWhatsapp: true});
+                Toast.show({
+                  type: 'success',
+                  text1: 'Shared via WhatsApp!',
+                  text2: 'You can now claim your coupon',
+                });
+              }
               setIsDisabled(false);
             })
             .catch(err => {
@@ -405,6 +452,11 @@ const ShareDetails = ({route, navigation}) => {
           Share.shareSingle(options)
             .then(res => {
               setPlatform({...platform, isSMS: true});
+              Toast.show({
+                type: 'success',
+                text1: 'Shared via SMS!',
+                text2: 'You can now claim your coupon',
+              });
               setIsDisabled(false);
             })
             .catch(err => {
@@ -418,7 +470,7 @@ const ShareDetails = ({route, navigation}) => {
       }
     } else if (type === 'LINKEDIN') {
       shareToLinkedIn();
-    } else if (type === 'INSTAGRAM') {
+    } else if (type === 'TWITTER') {
       try {
         setModalVisible(false);
         const imageUrl = checkdin?.data?.checkin_img;
@@ -429,33 +481,38 @@ const ShareDetails = ({route, navigation}) => {
           const base64Image = reader.result?.split(';base64,').pop();
           const shareOptions = {
             title: 'Share via',
-            // message: `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`,
-            url: `data:image/png;base64, ${base64Image}`, // Use the base64 image data here
-            social: Share.Social.INSTAGRAM,
-            type: 'image/png', // Adjust the MIME type as needed.
+            message: `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`,
+            url: `data:image/png;base64, ${base64Image}`,
+            social: Share.Social.TWITTER,
+            type: 'image/png',
           };
           const clipboardText = `${text}\n \nHello  friends! Be sure to download the Chekdin App to unlock this exclusive deal, from  ${couponList.data.merchant} \n \n${link}`;
           Clipboard.setString(clipboardText);
           Share.shareSingle(shareOptions)
             .then(res => {
-              console.log('Share result: on insta', res);
+              console.log('Share result: on Twitter', res);
               if (res.action === Share.sharedAction) {
-                setPlatform({...platform, isInstagram: true});
+                setPlatform({...platform, isTwitter: true});
+                Toast.show({
+                  type: 'success',
+                  text1: 'Posted to Twitter!',
+                  text2: 'You can now claim your coupon',
+                });
               } else if (res.action === Share.dismissedAction) {
                 console.log('Share dismissed');
               }
               setIsDisabled(false);
             })
             .catch(err => {
-              console.error('Error sharing to Insta:', err);
+              console.error('Error sharing to Twitter:', err);
               setIsDisabled(false);
-              setPlatform({...platform, isInstagram: false});
+              setPlatform({...platform, isTwitter: false});
             });
         };
         reader.readAsDataURL(blob);
       } catch (error) {
-        console.error('Error sharing to Instagram:', error);
-        setPlatform({...platform, isInstagram: false});
+        console.error('Error sharing to Twitter:', error);
+        setPlatform({...platform, isTwitter: false});
       }
     }
   };

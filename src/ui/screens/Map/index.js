@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  ActivityIndicator,
   Dimensions,
   Platform,
   Alert,
@@ -18,6 +17,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {filterMerchentList} from '../../../slices/merchentSlice';
 import PermissionHandler from '../../../utils/permissionHandler';
 import Toast from 'react-native-toast-message';
+import Loader from '../../elements/Loader';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -96,7 +96,7 @@ const MapWithIcon = ({navigation, route}) => {
         filterMerchentList({
           latitude: userLocation.latitude,
           longitude: userLocation.longitude,
-          radius_in_km: 50,
+          radius_in_km: 48, // 30 miles
         }),
       );
     } catch (error) {
@@ -266,12 +266,7 @@ const MapWithIcon = ({navigation, route}) => {
   };
 
   if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#02676C" />
-        <Text style={styles.loadingText}>Loading nearby merchants...</Text>
-      </View>
-    );
+    return <Loader message="Loading nearby merchants..." />;
   }
 
   if (error) {
